@@ -4,7 +4,7 @@ import Header from "./Header";
 export default function Layout(props) {
   return (
     <Fragment>
-      <Header />
+      {props.header ? <Header /> : ""}
       {props.children}
     </Fragment>
   );
