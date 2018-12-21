@@ -3,11 +3,15 @@ import React, { Component, Children, cloneElement } from "react";
 import MapboxGl from "mapbox-gl/dist/mapbox-gl.js";
 import { connect } from "react-redux";
 import { setDataLoaded } from "../../../store/reducers/home/HomeActions";
+import styled from "styled-components";
+
+const MapInterface = styled.section`
+  width: 100vw;
+  height: 100vh;
+`;
 
 class Mapview extends Component {
   componentDidMount() {
-    this.props.setDataLoaded(true);
-
     MapboxGl.accessToken =
       "pk.eyJ1Ijoibm9jbHVlNHUiLCJhIjoiY2pvZWY2ZTA5MXdkbjN3bGVicm1hZDNvZCJ9.kIU-GIm7Cl36xhEFLaPU1w";
 
@@ -33,19 +37,12 @@ class Mapview extends Component {
     // );
 
     return (
-      <div
+      <MapInterface
         className={this.props.hidden ? "hidden" : "Map"}
         ref={x => {
           this.container = x;
         }}
-        style={
-          this.props.halve
-            ? { height: "50vh", width: "105%" }
-            : { height: "100vh", width: "100vw" }
-        }
-      >
-        {/* {children} */}
-      </div>
+      />
     );
   }
 }

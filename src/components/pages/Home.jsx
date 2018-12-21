@@ -7,13 +7,8 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <LoadingScreen hidden={this.props.dataLoaded ? false : true} />
-        <MapviewBlock
-          halve={false}
-          hidden={this.props.dataLoaded ? true : false}
-        >
-          Discover the map
-        </MapviewBlock>
+        <LoadingScreen hidden={this.props.state.dataLoaded} />
+        <MapviewBlock halve={false}>Discover the map</MapviewBlock>
       </Fragment>
     );
   }

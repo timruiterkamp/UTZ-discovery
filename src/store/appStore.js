@@ -3,11 +3,7 @@ import thunk from "redux-thunk";
 import RootReducer from "./reducers/RootReducer";
 
 const middleware = [thunk];
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    trace: true,
-    traceLimit: 25
-  }) || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...middleware));
 
