@@ -1,7 +1,7 @@
 const themeConfig = {
   color: {
-    primary: "#45b69c",
-    secondary: "#e9faf5",
+    primary: "#F7D73B",
+    secondary: "#1A1A1A",
     validation: {
       error: "#f42d4e",
       valid: "#44b59b"
@@ -19,12 +19,17 @@ const themeConfig = {
         outline: "#45b69c"
       },
       button: {
+        default: "#45b69c",
         submit: {
           default: "#45b69c",
           hover: "#2c8077"
         }
       }
     }
+  },
+  font: {
+    text: "Karla",
+    title: "Rubik"
   }
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
+import JourneyButton from "../button/JourneyButton";
 
 const IntroductionBlock = styled.section`
   position: absolute;
@@ -31,6 +32,7 @@ export default function CodeOfConduct() {
         increases their social and economic resilience while safeguarding the
         earth’s natural resources for the future.{" "}
       </p>
+      <JourneyButton />
     </IntroductionBlock>
   );
 }
