@@ -1,5 +1,3 @@
-// import ValidationController from "../../../controllers/ValidationController";
-
 function dataLoaded(value) {
   return {
     type: "SET_DATA_LOADED",
