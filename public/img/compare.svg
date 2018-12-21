@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="17px" viewBox="0 0 23 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="buttons/compare" transform="translate(-9.000000, -12.000000)" fill-rule="nonzero" stroke="#2D2D2D">
+            <g id="Compare">
+                <g id="Group" transform="translate(10.000000, 13.000000)">
+                    <polygon id="Path" points="0 2.96296296 0 7.03703704 6.16216216 7.03703704 6.16216216 10 12 4.81481481 6.16216216 0 6.16216216 2.96296296"></polygon>
+                    <polygon id="Path-Copy" points="21 7.96296296 21 12.037037 14.8378378 12.037037 14.8378378 15 9 9.81481481 14.8378378 5 14.8378378 7.96296296"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
