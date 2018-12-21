@@ -1,37 +1,41 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { changeHomeInterface } from "../../../store/reducers/home/HomeActions";
-import styled from "styled-components";
-import themeConfig from "../../../theme/themeConfig";
+// import React, { Component } from "react";
+// import { connect } from "react-redux";
+// import { setDataLoaded } from "../../../store/reducers/home/HomeActions";
+// import styled from "styled-components";
 
-const Button = styled.button`
-  padding: 0.75em 1em;
-  border-radius: 1em;
-`;
+// const Button = styled.button`
+//   padding: 0.75em 1em;
+//   border-radius: 1em;
+// `;
 
-function setNewHomeInterface() {
-  // console.log(this.props);
-}
-class JourneyButton extends Component {
-  render() {
-    console.log(this.props.state.changeInterface);
-    return <Button onClick={setNewHomeInterface}>{this.props.children}</Button>;
-  }
-}
+// class JourneyButton extends Component {
+//   setNewHomeInterface = e => {
+//     e.preventDefault();
 
-const mapStateToProps = state => {
-  return {
-    state: {
-      changeInterface: state.home.changeInterface
-    }
-  };
-};
+//     this.props.setDataLoaded(true);
+//   };
 
-const actions = {
-  changeHomeInterface
-};
+//   render() {
+//     console.log(this.props.state.dataLoaded);
+//     return (
+//       <Button onClick={this.setNewHomeInterface}>{this.props.children}</Button>
+//     );
+//   }
+// }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(JourneyButton);
+// const mapStateToProps = state => {
+//   return {
+//     state: {
+//       dataLoaded: state.home.dataLoaded
+//     }
+//   };
+// };
+
+// const actions = {
+//   setDataLoaded
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   actions
+// )(JourneyButton);

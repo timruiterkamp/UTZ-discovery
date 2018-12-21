@@ -19,9 +19,9 @@ const LoadingTitle = styled.h1`
   font-size: 3em;
 `;
 
-export default function LoadingScreen() {
+export default function LoadingScreen(props) {
   return (
-    <LoadingLayout>
+    <LoadingLayout className={props.hidden ? "hidden" : ""}>
       <LoadingTitle>Rhomis Datamap</LoadingTitle>
       <Loader
         type="RevolvingDot"

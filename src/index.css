@@ -17,3 +17,7 @@ code {
 .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-bottom-right {
   display: none !important;
 }
+
+.hidden {
+  display: none !important;
+}

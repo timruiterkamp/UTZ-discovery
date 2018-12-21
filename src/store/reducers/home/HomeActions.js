@@ -7,6 +7,6 @@ function dataLoaded(value) {
   };
 }
 
-export const changeHomeInterface = dataStatus => dispatch => {
+export const setDataLoaded = dataStatus => dispatch => {
   dispatch(dataLoaded(dataStatus));
 };
