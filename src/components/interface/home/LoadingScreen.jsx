@@ -22,7 +22,7 @@ const LoadingTitle = styled.h1`
 export default function LoadingScreen(props) {
   return (
     <LoadingLayout className={props.hidden ? "hidden" : ""}>
-      <LoadingTitle>Rhomis Datamap</LoadingTitle>
+      <LoadingTitle>UTZ Discovery</LoadingTitle>
       <Loader
         type="RevolvingDot"
         color={themeConfig.color.secondary}

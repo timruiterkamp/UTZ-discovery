@@ -32,10 +32,6 @@ class Mapview extends Component {
   }
 
   render() {
-    // const children = Children.map(this.props.children, child =>
-    //   cloneElement(child, { map: this.map })
-    // );
-
     return (
       <MapInterface
         className={this.props.hidden ? "hidden" : "Map"}
