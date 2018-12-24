@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
+import { Link } from "react-router-dom";
 
 const MenuLayout = styled.nav`
   display: flex;
@@ -23,13 +24,19 @@ export class Menu extends Component {
     return (
       <MenuLayout>
         <MenuItem>
-          <img src="/img/compare.svg/" alt="compare" />
+          <Link to="/compare">
+            <img src="/img/compare.svg/" alt="compare" />
+          </Link>
         </MenuItem>
         <MenuItem>
-          <img src="/img/filter.svg/" alt="filter" />
+          <Link to="/filter">
+            <img src="/img/filter.svg/" alt="filter" />
+          </Link>
         </MenuItem>
         <MenuItem>
-          <img src="/img/information.svg/" alt="information" />
+          <Link to="/information">
+            <img src="/img/information.svg/" alt="information" />
+          </Link>
         </MenuItem>
       </MenuLayout>
     );

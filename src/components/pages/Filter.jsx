@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Layout from "../layout/Layout";
-export default class Advice extends Component {
+export default class Filter extends Component {
   render() {
-    return <Layout>Advice!</Layout>;
+    return <Layout>Filter!</Layout>;
   }
 }
