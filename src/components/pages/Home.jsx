@@ -6,10 +6,12 @@ import { Menu } from "../interface/menu/Menu";
 
 class Home extends Component {
   render() {
+    const { dataLoaded, mapLoaded } = this.props.state;
+
     return (
       <Fragment>
         <LoadingScreen hidden={this.props.state.dataLoaded} />
-        {this.props.state.dataLoaded && <Menu />}
+        {dataLoaded && mapLoaded && <Menu />}
         <MapviewBlock halve={false}>Discover the map</MapviewBlock>
       </Fragment>
     );
@@ -19,7 +21,8 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     state: {
-      dataLoaded: state.home.dataLoaded
+      dataLoaded: state.data.dataLoaded,
+      mapLoaded: state.data.mapLoaded
     }
   };
 };

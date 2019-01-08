@@ -17,26 +17,42 @@ const MenuItem = styled.div`
   height: 50px;
   background-color: ${themeConfig.color.primary};
   border-radius: 50%;
-  /* padding: 0 1em; */
+  display: flex;
+  justify-content: center;
+  margin: 0 0.75em;
+`;
+
+const MenuImageContainer = styled.div`
+  align-self: center;
+`;
+
+const MenuImage = styled.img`
+  height: 20px;
 `;
 export class Menu extends Component {
   render() {
     return (
       <MenuLayout>
         <MenuItem>
-          <Link to="/compare">
-            <img src="/img/compare.svg/" alt="compare" />
-          </Link>
+          <MenuImageContainer>
+            <Link to="/compare">
+              <MenuImage src="/img/compare.svg" alt="compare" />
+            </Link>
+          </MenuImageContainer>
         </MenuItem>
         <MenuItem>
-          <Link to="/filter">
-            <img src="/img/filter.svg/" alt="filter" />
-          </Link>
+          <MenuImageContainer>
+            <Link to="/filter">
+              <MenuImage src="/img/filter.svg" alt="filter" />
+            </Link>
+          </MenuImageContainer>
         </MenuItem>
         <MenuItem>
-          <Link to="/information">
-            <img src="/img/information.svg/" alt="information" />
-          </Link>
+          <MenuImageContainer>
+            <Link to="/information">
+              <MenuImage src="/img/information.svg" alt="information" />
+            </Link>
+          </MenuImageContainer>
         </MenuItem>
       </MenuLayout>
     );
