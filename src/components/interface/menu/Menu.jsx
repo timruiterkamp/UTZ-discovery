@@ -13,11 +13,11 @@ const MenuLayout = styled.nav`
   z-index: 1;
 `;
 const MenuItem = styled.div`
-  width: 3.5em;
-  height: 3.5em;
+  width: 50px;
+  height: 50px;
   background-color: ${themeConfig.color.primary};
   border-radius: 50%;
-  padding: 0 1em;
+  /* padding: 0 1em; */
 `;
 export class Menu extends Component {
   render() {

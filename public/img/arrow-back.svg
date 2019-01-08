@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="15px" viewBox="0 0 19 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="buttons/backbutton" transform="translate(-105.000000, -129.000000)" fill-rule="nonzero" stroke="#2D2D2D" stroke-width="2">
+            <g id="Group-2">
+                <g id="Group" transform="translate(114.500000, 136.500000) rotate(-180.000000) translate(-114.500000, -136.500000) translate(106.000000, 130.000000)">
+                    <polyline id="Path-3" points="10.3030303 12.7671757 16.8800602 6.38358783 10.3030303 -3.96883546e-14"></polyline>
+                    <path d="M15.7121212,6.38358783 L0,6.38358783" id="Path-4"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
