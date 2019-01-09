@@ -8,6 +8,7 @@ import * as d3 from "d3";
 import "./map.css";
 
 const MapInterface = styled.section`
+  position: absolute;
   width: 100vw;
   height: 100vh;
 `;
@@ -25,8 +26,9 @@ class Mapview extends Component {
     });
 
     const svg = d3
-      .select(this.container)
+      .select(".mapboxgl-canvas-container")
       .append("svg")
+      .attr("class", "datapoints")
       .append("g");
 
     map.on("load", () => {
@@ -38,7 +40,7 @@ class Mapview extends Component {
           .data(d)
           .enter()
           .append("circle")
-          .on("click", d => console.log(d))
+          .on("click", d => alert(d.country))
           .transition()
           .duration(0)
           .attr("cx", d => project([+d.long, +d.lat]).x)
