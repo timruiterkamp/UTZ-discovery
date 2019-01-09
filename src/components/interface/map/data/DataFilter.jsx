@@ -55,7 +55,7 @@ export class DataFilter extends Component {
           .map(value => value.values)
           .map(item => ({
             country: item[0].key,
-            data: item[0].values[0],
+            data: item[0].values,
             lat: item[1].value[0].lat,
             long: item[1].value[0].long
           }));

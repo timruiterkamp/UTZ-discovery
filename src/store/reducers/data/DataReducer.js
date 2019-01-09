@@ -1,7 +1,8 @@
 const initialState = {
   dataLoaded: false,
   mapLoaded: false,
-  rhomisData: {}
+  rhomisData: null,
+  activeCountry: null
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         rhomisData: action.value
+      };
+    case "SET_ACTIVE_COUNTRY":
+      return {
+        ...state,
+        activeCountry: action.value
       };
     default:
       return state;

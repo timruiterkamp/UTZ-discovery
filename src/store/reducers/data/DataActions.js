@@ -19,6 +19,13 @@ function setRhomisData(value) {
   };
 }
 
+function activeCountry(value) {
+  return {
+    type: "SET_ACTIVE_COUNTRY",
+    value
+  };
+}
+
 export const setDataLoaded = dataStatus => dispatch => {
   dispatch(dataLoaded(dataStatus));
 };
@@ -29,4 +36,8 @@ export const setMapLoaded = mapStatus => dispatch => {
 
 export const setGlobalRhomisData = data => dispatch => {
   dispatch(setRhomisData(data));
+};
+
+export const setActiveCountry = data => dispatch => {
+  dispatch(activeCountry(data));
 };

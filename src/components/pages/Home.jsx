@@ -3,16 +3,18 @@ import MapviewBlock from "../interface/map/Mapview";
 import { connect } from "react-redux";
 import LoadingScreen from "../interface/home/LoadingScreen";
 import { Menu } from "../interface/menu/Menu";
+import CountryInformation from "../interface/sidebar/CountryInformation";
 
 class Home extends Component {
   render() {
-    const { dataLoaded, mapLoaded } = this.props.state;
+    const { dataLoaded, mapLoaded, activeCountry } = this.props.state;
 
     return (
       <Fragment>
-        <LoadingScreen hidden={this.props.state.dataLoaded} />
+        <LoadingScreen hidden={dataLoaded} />
         {dataLoaded && mapLoaded && <Menu />}
-        <MapviewBlock halve={false}>Discover the map</MapviewBlock>
+        {activeCountry && <CountryInformation />}
+        <MapviewBlock halve={false} />
       </Fragment>
     );
   }
@@ -22,7 +24,8 @@ const mapStateToProps = state => {
   return {
     state: {
       dataLoaded: state.data.dataLoaded,
-      mapLoaded: state.data.mapLoaded
+      mapLoaded: state.data.mapLoaded,
+      activeCountry: state.data.activeCountry
     }
   };
 };

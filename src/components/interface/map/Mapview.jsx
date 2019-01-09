@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from "react";
 import MapboxGl from "mapbox-gl/dist/mapbox-gl.js";
 import { connect } from "react-redux";
-import { setMapLoaded } from "../../../store/reducers/data/DataActions";
+import {
+  setMapLoaded,
+  setActiveCountry
+} from "../../../store/reducers/data/DataActions";
 import styled from "styled-components";
 import FilteredData from "./data/DataFilter";
 import * as d3 from "d3";
@@ -32,6 +35,8 @@ class Mapview extends Component {
       .append("g");
 
     map.on("load", () => {
+      const { setActiveCountry, setMapLoaded } = this.props;
+
       generateInformationTips(this.props.state.rhomisData);
 
       function generateInformationTips(d) {
@@ -40,7 +45,7 @@ class Mapview extends Component {
           .data(d)
           .enter()
           .append("circle")
-          .on("click", d => alert(d.country))
+          .on("click", d => activeCurrentCountry(d))
           .transition()
           .duration(0)
           .attr("cx", d => project([+d.long, +d.lat]).x)
@@ -68,7 +73,11 @@ class Mapview extends Component {
         return map.project(new MapboxGl.LngLat(+coords[0], +coords[1]));
       }
 
-      this.props.setMapLoaded(true);
+      function activeCurrentCountry(country) {
+        setActiveCountry(country);
+      }
+
+      setMapLoaded(true);
     });
   }
 
@@ -94,12 +103,14 @@ class Mapview extends Component {
 const mapStateToProps = state => ({
   state: {
     mapLoaded: state.data.mapLoaded,
-    rhomisData: state.data.rhomisData
+    rhomisData: state.data.rhomisData,
+    activeCountry: state.data.activeCountry
   }
 });
 
 const actions = {
-  setMapLoaded
+  setMapLoaded,
+  setActiveCountry
 };
 
 export default connect(
