@@ -9,6 +9,7 @@ const Grid = styled.div`
 `;
 const Text = styled.p`
   font-size: 1em;
+  font-weight: 700;
 `;
 export default function HouseHold(props) {
   const HouseHoldTypeData = d3
@@ -31,25 +32,21 @@ export default function HouseHold(props) {
 
   return (
     <Grid>
-      <Text>
-        standard deviation:
-        {StandardHouseSize}
-      </Text>
-      <Text>
-        Min: eerste getal, max: laatste: <br />
-        {MinMaxHouseSize}
-      </Text>
-      <Text>
-        household types:
-        {HouseHoldTypes
-          ? HouseHoldTypes.map(type => (
-              <li key={type.key}>
-                {type.key}
-                {type.size}
-              </li>
-            ))
-          : ""}
-      </Text>
+      <Text>standard deviation:</Text>
+      {StandardHouseSize}
+
+      <Text>Min: eerste getal, max: laatste: </Text>
+      {MinMaxHouseSize}
+
+      <Text>household types: </Text>
+      {HouseHoldTypes
+        ? HouseHoldTypes.map(type => (
+            <li key={type.key}>
+              {type.key}
+              {type.size}
+            </li>
+          ))
+        : ""}
     </Grid>
   );
 }
