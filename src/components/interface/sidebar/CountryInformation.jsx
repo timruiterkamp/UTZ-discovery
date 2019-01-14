@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
@@ -6,6 +6,7 @@ import CountyFiltering from "./data/CountyFiltering";
 import CountyCropses from "./data/CountyCropses";
 import LandStatistics from "./data/LandStatistics";
 import HouseHold from "./data/HouseHold";
+import TotalIncome from "./data/TotalIncome";
 
 // import { setCountryDetailInformation } from "../../../store/reducers/data/DataActions";
 
@@ -18,10 +19,6 @@ const SideBar = styled.section`
   overflow-y: scroll;
   z-index: 100;
   background-color: ${themeConfig.color.white};
-`;
-
-const ZoomedSidaBar = styled(SideBar)`
-  width: 40vw;
 `;
 
 const ContentBox = styled.div`
@@ -94,6 +91,7 @@ export class CountryInformation extends Component {
           <Title>{activeCountry.country}</Title>
           <Text>Aantal geïnterviewde boeren: {activeCountry.data.length}</Text>
           <HouseHold data={activeCountry.data} />
+          {/* <TotalIncome data={activeCountry.data} /> */}
           <Text>Beschikbare regio's:</Text>
           <CountyFiltering data={activeCountry.data} />
           <Text>Total land cultivated:</Text>
