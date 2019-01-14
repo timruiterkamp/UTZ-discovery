@@ -8,12 +8,12 @@ const TotalLand = styled.p`
   color: #3a3a3a;
 `;
 export default function CountryCropses(props) {
-  const totalLandCultivated = d3
+  const totalCropses = d3
     .nest()
-    .key(d => d.landcultivated)
+    .key(d => d.cropses_all)
     .entries(props.data);
 
-  const totalLand = d3.sum(totalLandCultivated, d => Number(d.key));
+  const totalLand = console.log(totalCropses);
 
   return <TotalLand>{totalLand}</TotalLand>;
 }

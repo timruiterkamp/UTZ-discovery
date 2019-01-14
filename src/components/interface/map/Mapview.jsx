@@ -32,68 +32,70 @@ class Mapview extends Component {
   }
 
   generateInformationTips(d) {
-    this.svg
-      .selectAll("circle")
-      .data(d)
-      .enter()
-      .append("circle")
-      .on("click", d => {
-        this.activeCurrentCountry(d);
-        // setCountryCenter(d.lat, d.long);
-      })
-      .transition()
-      .duration(500)
-      .attr("cx", d => this.project([+d.long, +d.lat]).x)
-      .attr("cy", d => this.project([+d.long, +d.lat]).y);
-
-    const update = () => {
-      const checkIfPointsExist = document.querySelector(".regionpoints")
-        ? true
-        : false;
-      if (this.map.getZoom() >= 5 && !checkIfPointsExist) {
-        const country = d.filter(
-          countries => countries.country === this.props.currentCountry.country
-        );
-
-        const regions = d3
-          .nest()
-          .key(d => d.region.toLowerCase())
-          .entries(country[0].data);
-
-        const regionSVG = d3
-          .select(".mapboxgl-canvas-container")
-          .append("svg")
-          .attr("class", "regionpoints")
-          .append("g");
-
-        regions.map(region =>
-          regionSVG
-            .selectAll("circle")
-            .data(region)
-            .enter()
-            .append("circle")
-            .transition()
-            .duration(500)
-            .attr("cx", this.project([18, 13]).x)
-            .attr("cy", this.project([18, 13]).y)
-        );
-      }
+    if (this.svg) {
       this.svg
         .selectAll("circle")
-        .attr("cx", d => this.project([+d.long, +d.lat]).x)
-        .attr("cy", d => this.project([+d.long, +d.lat]).y)
+        .data(d)
+        .enter()
+        .append("circle")
+        .on("click", d => {
+          this.activeCurrentCountry(d);
+          // setCountryCenter(d.lat, d.long);
+        })
         .transition()
-        .duration(750)
-        .attr("r", 7);
-    };
+        .duration(500)
+        .attr("cx", d => this.project([+d.long, +d.lat]).x)
+        .attr("cy", d => this.project([+d.long, +d.lat]).y);
 
-    update();
+      const update = () => {
+        const checkIfPointsExist = document.querySelector(".regionpoints")
+          ? true
+          : false;
+        if (this.map.getZoom() >= 5 && !checkIfPointsExist) {
+          const country = d.filter(
+            countries => countries.country === this.props.currentCountry.country
+          );
 
-    this.map
-      .on("viewreset", () => update())
-      .on("move", () => update())
-      .on("moveend", () => update())
-      .on("zoom", () => update());
+          const regions = d3
+            .nest()
+            .key(d => d.region.toLowerCase())
+            .entries(country[0].data);
+
+          const regionSVG = d3
+            .select(".mapboxgl-canvas-container")
+            .append("svg")
+            .attr("class", "regionpoints")
+            .append("g");
+
+          regions.map(region =>
+            regionSVG
+              .selectAll("circle")
+              .data(region)
+              .enter()
+              .append("circle")
+              .transition()
+              .duration(500)
+              .attr("cx", this.project([18, 13]).x)
+              .attr("cy", this.project([18, 13]).y)
+          );
+        }
+        this.svg
+          .selectAll("circle")
+          .attr("cx", d => this.project([+d.long, +d.lat]).x)
+          .attr("cy", d => this.project([+d.long, +d.lat]).y)
+          .transition()
+          .duration(750)
+          .attr("r", 7);
+      };
+
+      update();
+
+      this.map
+        .on("viewreset", () => update())
+        .on("move", () => update())
+        .on("moveend", () => update())
+        .on("zoom", () => update());
+    }
   }
 
   project(coords) {
