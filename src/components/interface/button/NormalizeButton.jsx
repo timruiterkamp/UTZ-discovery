@@ -22,7 +22,7 @@ const Button = styled.button`
 `;
 export default function NormalizeButton(props) {
   return (
-    <Link to={props.link}>
+    <Link to={props.link ? props.link : ""}>
       <Button>{props.label}</Button>
     </Link>
   );

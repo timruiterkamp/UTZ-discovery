@@ -4,15 +4,16 @@
   height: 100%;
 }
 .datapoints circle {
-  fill: #00bcd4;
-  stroke: #00bcd4;
-  stroke-width: 0;
+  fill: transparent;
+  stroke: #f7d73b;
+  stroke-width: 2;
   cursor: pointer;
   transition: 0.5s fill, 0.5s stroke-width;
 }
 .datapoints circle:hover {
-  fill: #fff;
-  stroke-width: 10;
+  fill: #3a3a3a;
+  stroke: #f7d73b;
+  stroke-width: 5;
 }
 
 .mapboxgl-control-container {

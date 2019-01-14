@@ -2,7 +2,11 @@ const initialState = {
   dataLoaded: false,
   mapLoaded: false,
   rhomisData: null,
-  activeCountry: null
+  activeCountry: null,
+  activeCounty: null,
+  countyData: null,
+  map: null,
+  svg: null
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -26,6 +30,26 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         activeCountry: action.value
+      };
+    case "SET_ACTIVE_COUNTY":
+      return {
+        ...state,
+        activeCounty: action.value
+      };
+    case "SET_COUNTY_DATA":
+      return {
+        ...state,
+        countyData: action.value
+      };
+    case "SET_MAP":
+      return {
+        ...state,
+        map: action.value
+      };
+    case "SET_SVG":
+      return {
+        ...state,
+        svg: action.value
       };
     default:
       return state;

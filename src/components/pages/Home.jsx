@@ -11,10 +11,10 @@ class Home extends Component {
 
     return (
       <Fragment>
-        <LoadingScreen hidden={dataLoaded} />
+        <LoadingScreen hidden={dataLoaded && mapLoaded} />
         {dataLoaded && mapLoaded && <Menu />}
         {activeCountry && <CountryInformation />}
-        <MapviewBlock halve={false} />
+        <MapviewBlock currentCountry={activeCountry ? activeCountry : ""} />
       </Fragment>
     );
   }

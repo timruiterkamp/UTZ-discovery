@@ -26,6 +26,34 @@ function activeCountry(value) {
   };
 }
 
+function activeCounty(value) {
+  return {
+    type: "SET_ACTIVE_COUNTY",
+    value
+  };
+}
+
+function countyData(value) {
+  return {
+    type: "SET_ACTIVE_COUNTY",
+    value
+  };
+}
+
+function initMap(value) {
+  return {
+    type: "SET_MAP",
+    value
+  };
+}
+
+function setSVG(value) {
+  return {
+    type: "SET_SVG",
+    value
+  };
+}
+
 export const setDataLoaded = dataStatus => dispatch => {
   dispatch(dataLoaded(dataStatus));
 };
@@ -40,4 +68,20 @@ export const setGlobalRhomisData = data => dispatch => {
 
 export const setActiveCountry = data => dispatch => {
   dispatch(activeCountry(data));
+};
+
+export const setActiveCounty = data => dispatch => {
+  dispatch(activeCounty(data));
+};
+
+export const setCountyData = data => dispatch => {
+  dispatch(countyData(data));
+};
+
+export const setMap = data => dispatch => {
+  dispatch(initMap(data));
+};
+
+export const setBaseSVG = data => dispatch => {
+  dispatch(setSVG(data));
 };

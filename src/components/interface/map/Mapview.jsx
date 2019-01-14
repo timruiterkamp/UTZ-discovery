@@ -3,7 +3,9 @@ import MapboxGl from "mapbox-gl/dist/mapbox-gl.js";
 import { connect } from "react-redux";
 import {
   setMapLoaded,
-  setActiveCountry
+  setActiveCountry,
+  setMap,
+  setBaseSVG
 } from "../../../store/reducers/data/DataActions";
 import styled from "styled-components";
 import FilteredData from "./data/DataFilter";
@@ -17,80 +19,123 @@ const MapInterface = styled.section`
 `;
 
 class Mapview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currCountry: this.props.currentCountry
+    };
+
+    console.log(this.state.currCountry);
+    this.generateInformationTips = this.generateInformationTips.bind(this);
+    this.project = this.project.bind(this);
+    this.activeCurrentCountry = this.activeCurrentCountry.bind(this);
+  }
+
+  generateInformationTips(d) {
+    this.svg
+      .selectAll("circle")
+      .data(d)
+      .enter()
+      .append("circle")
+      .on("click", d => {
+        this.activeCurrentCountry(d);
+        // setCountryCenter(d.lat, d.long);
+      })
+      .transition()
+      .duration(500)
+      .attr("cx", d => this.project([+d.long, +d.lat]).x)
+      .attr("cy", d => this.project([+d.long, +d.lat]).y);
+
+    const update = () => {
+      const checkIfPointsExist = document.querySelector(".regionpoints")
+        ? true
+        : false;
+      if (this.map.getZoom() >= 5 && !checkIfPointsExist) {
+        const country = d.filter(
+          countries => countries.country === this.props.currentCountry.country
+        );
+
+        const regions = d3
+          .nest()
+          .key(d => d.region.toLowerCase())
+          .entries(country[0].data);
+
+        const regionSVG = d3
+          .select(".mapboxgl-canvas-container")
+          .append("svg")
+          .attr("class", "regionpoints")
+          .append("g");
+
+        regions.map(region =>
+          regionSVG
+            .selectAll("circle")
+            .data(region)
+            .enter()
+            .append("circle")
+            .transition()
+            .duration(500)
+            .attr("cx", this.project([18, 13]).x)
+            .attr("cy", this.project([18, 13]).y)
+        );
+      }
+      this.svg
+        .selectAll("circle")
+        .attr("cx", d => this.project([+d.long, +d.lat]).x)
+        .attr("cy", d => this.project([+d.long, +d.lat]).y)
+        .transition()
+        .duration(750)
+        .attr("r", 7);
+    };
+
+    update();
+
+    this.map
+      .on("viewreset", () => update())
+      .on("move", () => update())
+      .on("moveend", () => update())
+      .on("zoom", () => update());
+  }
+
+  project(coords) {
+    return this.map.project(new MapboxGl.LngLat(+coords[0], +coords[1]));
+  }
+
+  activeCurrentCountry(country) {
+    this.props.setActiveCountry(country);
+  }
+
   componentDidMount() {
+    const { setMapLoaded, setMap } = this.props;
+
     MapboxGl.accessToken =
       "pk.eyJ1Ijoibm9jbHVlNHUiLCJhIjoiY2pvZWY2ZTA5MXdkbjN3bGVicm1hZDNvZCJ9.kIU-GIm7Cl36xhEFLaPU1w";
 
-    const map = new MapboxGl.Map({
+    this.map = new MapboxGl.Map({
       container: this.container,
       style: "mapbox://styles/noclue4u/cjpsfnz0m4reg2rnpz6xi6mwf",
       center: [9.589804, 48.115494],
       zoom: 1.5
     });
 
-    const svg = d3
+    this.svg = d3
       .select(".mapboxgl-canvas-container")
       .append("svg")
       .attr("class", "datapoints")
       .append("g");
 
-    map.on("load", () => {
-      const { setActiveCountry, setMapLoaded } = this.props;
-
-      generateInformationTips(this.props.state.rhomisData);
-
-      function generateInformationTips(d) {
-        const circles = svg
-          .selectAll("circle")
-          .data(d)
-          .enter()
-          .append("circle")
-          .on("click", d => activeCurrentCountry(d))
-          .transition()
-          .duration(0)
-          .attr("cx", d => project([+d.long, +d.lat]).x)
-          .attr("cy", d => project([+d.long, +d.lat]).y);
-
-        const update = () => {
-          svg
-            .selectAll("circle")
-            .attr("cx", d => project([+d.long, +d.lat]).x)
-            .attr("cy", d => project([+d.long, +d.lat]).y)
-            .transition()
-            .duration(750)
-            .attr("r", 10);
-        };
-
-        update();
-
-        map
-          .on("viewreset", () => update())
-          .on("move", () => update())
-          .on("moveend", () => update())
-          .on("zoom", () => update());
-      }
-      function project(coords) {
-        return map.project(new MapboxGl.LngLat(+coords[0], +coords[1]));
-      }
-
-      function activeCurrentCountry(country) {
-        setActiveCountry(country);
-      }
-
+    this.map.on("load", () => {
+      setMap(this.map);
+      setBaseSVG(this.svg);
+      this.generateInformationTips(this.props.state.rhomisData);
       setMapLoaded(true);
     });
-  }
-
-  componentWillUnmount() {
-    // setTimeout(() => map.remove());
   }
 
   render() {
     return (
       <Fragment>
-        <FilteredData />
+        {!this.props.state.activeCountry && <FilteredData />}
         <MapInterface
-          className={this.props.hidden ? "hidden" : "Map"}
           ref={x => {
             this.container = x;
           }}
@@ -110,7 +155,9 @@ const mapStateToProps = state => ({
 
 const actions = {
   setMapLoaded,
-  setActiveCountry
+  setActiveCountry,
+  setMap,
+  setBaseSVG
 };
 
 export default connect(
