@@ -4,7 +4,8 @@ import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
 import CountyFiltering from "./data/CountyFiltering";
 import CountyCropses from "./data/CountyCropses";
-import TotalLandCultivated from "./data/TotalLandCultivated";
+import LandStatistics from "./data/LandStatistics";
+import HouseHold from "./data/HouseHold";
 
 // import { setCountryDetailInformation } from "../../../store/reducers/data/DataActions";
 
@@ -88,49 +89,18 @@ export class CountryInformation extends Component {
     console.log(activeCountry);
 
     return (
-      <Fragment>
-        {!this.state.zoomed ? (
-          <SideBar>
-            <ContentBox>
-              <Title>{activeCountry.country}</Title>
-              <Text>
-                Aantal geïnterviewde boeren: {activeCountry.data.length}
-              </Text>
-              <Text>Beschikbare regio's:</Text>
-              <CountyFiltering data={activeCountry.data} />
-              <Text>Total land cultivated:</Text>
-              <TotalLandCultivated data={activeCountry.data} />
-              <Button onClick={this.handleClick}>Bekijk regios</Button>
-            </ContentBox>
-          </SideBar>
-        ) : (
-          <ZoomedSidaBar>
-            <ContentBox>
-              <Title>{activeCountry.country}</Title>
-              <Text>
-                Aantal geïnterviewde boeren: {activeCountry.data.length}
-              </Text>
-              <Text>Beschikbare regio's:</Text>
-              <CountyFiltering data={activeCountry.data} />
-              <Text>
-                Burkina Faso is a landlocked country in West Africa. It covers
-                an area of around 274,200 square kilometres (105,900 sq mi) and
-                is surrounded by six countries: Mali to the north; Niger to the
-                east; Benin to the southeast; Togo and Ghana to the south; and
-                Ivory Coast to the southwest. The July 2018 population estimate
-                by the United Nations was 19,751,651.[8] Burkina Faso is a
-                francophone country, with French as the official language of
-                government and business. Roughly 40% of the population speaks
-                the Mossi language.[9] Formerly called the Republic of Upper
-                Volta (1958–1984), the country was renamed "Burkina Faso" on 4
-                August 1984 by then-President Thomas Sankara. Its citizens are
-                known as Burkinabé. Its capital is Ouagadougou.{" "}
-              </Text>
-              <Button onClick={this.handleClick}>Bekijk regios</Button>
-            </ContentBox>
-          </ZoomedSidaBar>
-        )}
-      </Fragment>
+      <SideBar>
+        <ContentBox>
+          <Title>{activeCountry.country}</Title>
+          <Text>Aantal geïnterviewde boeren: {activeCountry.data.length}</Text>
+          <HouseHold data={activeCountry.data} />
+          <Text>Beschikbare regio's:</Text>
+          <CountyFiltering data={activeCountry.data} />
+          <Text>Total land cultivated:</Text>
+          <LandStatistics data={activeCountry.data} />
+          <Button onClick={this.handleClick}>Bekijk per regio</Button>
+        </ContentBox>
+      </SideBar>
     );
   }
 }
