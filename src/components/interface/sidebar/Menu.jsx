@@ -45,7 +45,6 @@ export class Menu extends Component {
   handleClick(e) {
     const newActiveItem = e.target.getAttribute("label");
     this.props.setSidebarMenu(newActiveItem);
-    console.log(this.props.state.activeMenuItem);
   }
   render() {
     const { activeMenuItem } = this.props.state;

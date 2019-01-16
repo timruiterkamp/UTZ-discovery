@@ -92,9 +92,6 @@ export class CountryInformation extends Component {
 
           {activeMenuItem === "income" && (
             <Fragment>
-              <Text>
-                Aantal geïnterviewde boeren: {activeCountry.data.length}
-              </Text>
               <HouseHold data={activeCountry.data} />
               {/* <TotalIncome data={activeCountry.data} /> */}
               <Text>Beschikbare regio's:</Text>

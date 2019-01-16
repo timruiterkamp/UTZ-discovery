@@ -23,6 +23,11 @@ export default function HouseHold(props) {
     .key(d => d.HHsizemembers.replace(".", ","))
     .entries(props.data);
 
+  const HouseHoldDebt = d3
+    .nest()
+    .key(d => d.debts_have)
+    .entries(props.data);
+
   const totalIncome = d3
     .nest()
     .key(d => d.total_income.replace(".", ","))
@@ -69,6 +74,11 @@ export default function HouseHold(props) {
 
   return (
     <Grid className={"data-overview"}>
+      {HouseHoldDebt.map(debt => (
+        <li key={debt.key}>
+          {debt.key}: {debt.values.length}
+        </li>
+      ))}
       <Text>standard deviation:</Text>
       {StandardHouseSize.toFixed(1)}
       <Text>
