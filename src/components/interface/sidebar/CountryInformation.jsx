@@ -8,6 +8,7 @@ import LandStatistics from "./household/LandStatistics";
 import HouseHold from "./household/HouseHold";
 import TotalIncome from "./household/TotalIncome";
 import Menu from "./Menu";
+import CropsesData from "./cropses/CropsesData";
 
 // import { setCountryDetailInformation } from "../../../store/reducers/data/DataActions";
 
@@ -91,19 +92,13 @@ export class CountryInformation extends Component {
           <Button onClick={this.handleClick}>Bekijk per regio</Button>
 
           {activeMenuItem === "income" && (
-            <Fragment>
-              <HouseHold data={activeCountry.data} />
-              {/* <TotalIncome data={activeCountry.data} /> */}
-              <Text>Beschikbare regio's:</Text>
-              <CountyFiltering data={activeCountry.data} />
-              <Text>Total land cultivated:</Text>
-              <LandStatistics data={activeCountry.data} />
-            </Fragment>
+            <HouseHold data={activeCountry.data} />
           )}
 
           {activeMenuItem === "crops" && (
             <Fragment>
               <Text>Cropses data</Text>
+              <CropsesData data={activeCountry.data} />
             </Fragment>
           )}
 

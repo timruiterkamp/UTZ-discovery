@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import styled from "styled-components";
 import HouseHoldBar from "./HouseHoldBar";
 import themeConfig from "../../../../theme/themeConfig";
-
+import DebtBar from "./DebtBar";
 const Grid = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,6 +37,15 @@ const TwoColumnGrid = styled.section`
     display: flex;
     flex-direction: column;
   }
+`;
+
+const HouseHoldTypeList = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  text-align: center;
 `;
 export default function HouseHold(props) {
   const HouseHoldTypeData = d3
@@ -89,49 +98,43 @@ export default function HouseHold(props) {
     .entries(props.data);
 
   function numberWithCommas(x) {
-    return x
+    const transformedNumber = x
       .toString()
       .replace(".", ",")
       .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parseInt(transformedNumber);
   }
 
-  const totalNumber = d3.sum(totalIncome, d => Number(d.key));
-  const totalFarm = d3.sum(totalFarmIncome, d => Number(d.key));
-  const totalOffFarm = d3.sum(totalOffFarmIncome, d => Number(d.key));
-  const totalCropProduceValue = d3.sum(cropProduceValue, d => Number(d.key));
-  const totalFarmProduceValue = d3.sum(cropfarmValue, d => d.key);
-
-  console.log(totalFarmProduceValue / props.data.length);
-
-  const StandardHouseSize = d3.deviation(HouseHoldSize, d => Number(d.key));
-  const MinMaxHouseSize = d3.extent(HouseHoldSize, d => Number(d.key));
-  const TotalHouseSize = d3.sum(HouseHoldSize, d => Number(d.key));
-
+  const totalNumber = d3.sum(totalIncome, d => parseInt(d.key));
+  const totalFarm = d3.sum(totalFarmIncome, d => parseInt(d.key));
+  const totalOffFarm = d3.sum(totalOffFarmIncome, d => parseInt(d.key));
+  const totalCropProduceValue = d3.sum(cropProduceValue, d => parseInt(d.key));
+  const totalFarmProduceValue = d3.sum(cropfarmValue, d => parseInt(d.key));
+  const StandardHouseSize = d3.deviation(HouseHoldSize, d => parseInt(d.key));
+  const MinMaxHouseSize = d3.extent(HouseHoldSize, d => parseInt(d.key));
+  const TotalHouseSize = HouseHoldSize.map(d => ({
+    key: d.key,
+    size: d.values.length
+  }));
+  const CalculatedTotalHouseSize = d3.sum(
+    TotalHouseSize,
+    d => parseInt(d.key) * d.size
+  );
   const totalCultivatedLand = d3.sum(
     CultivatedLand,
-    d => Number(d.key) * Number(d.values.length)
+    d => parseInt(d.key) * parseInt(d.values.length)
   );
   const totalOwnedLand = d3.sum(
     OwnedLand,
-    d => Number(d.key) * Number(d.values.length)
+    d => parseInt(d.key) * parseInt(d.values.length)
   );
-
   const HouseHoldTypes = HouseHoldTypeData.map(household => ({
     key: household.key.replace("_", " "),
     size: household.values.length
   }));
 
-  console.log(props.data);
-  console.log(numberWithCommas(totalCropProduceValue / props.data.length));
-
   return (
     <Grid className={"data-overview "}>
-      {HouseHoldDebt.map(debt => (
-        <li key={debt.key}>
-          {debt.key}: {debt.values.length} in percentage:{" "}
-          {((debt.values.length / props.data.length) * 100).toFixed(2)}%
-        </li>
-      ))}
       <Text>standard deviation:</Text>
       {StandardHouseSize.toFixed(1)}
       <Text>
@@ -140,32 +143,37 @@ export default function HouseHold(props) {
       </Text>
       <Text>household types: </Text>
       <HouseHoldBar data={HouseHoldTypes} />
-      {HouseHoldTypes
-        ? HouseHoldTypes.map(type => (
-            <li key={type.key}>
-              <strong>{type.key}</strong>
-              <p>{type.size}</p>
-            </li>
-          ))
-        : ""}
-      <Text>Totaal per capita:</Text>{" "}
-      {numberWithCommas((totalNumber / props.data.length).toFixed(1))}
-      <Text>farm income per capita:</Text>{" "}
-      {numberWithCommas((totalFarm / props.data.length).toFixed(1))}
-      <Text>off farm income per capita:</Text>{" "}
-      {numberWithCommas((totalOffFarm / props.data.length).toFixed(1))}
-      <Text>Crops produced per capita:</Text>{" "}
-      {numberWithCommas((totalCropProduceValue / props.data.length).toFixed(1))}
-      <Text>Farm production per capita: </Text>{" "}
-      {numberWithCommas((totalFarmProduceValue / props.data.length).toFixed(1))}
+      <Text>Household types:</Text>
+      <HouseHoldTypeList>
+        {HouseHoldTypes
+          ? HouseHoldTypes.map(type => (
+              <li key={type.key}>
+                <strong>{type.key}</strong>
+                <p>{type.size}</p>
+              </li>
+            ))
+          : ""}
+      </HouseHoldTypeList>
+      <Text>Totaal per capita:</Text> $
+      {numberWithCommas(totalNumber / CalculatedTotalHouseSize)}
+      <Text>farm income per capita:</Text> $
+      {numberWithCommas(totalFarm / CalculatedTotalHouseSize)}
+      <Text>off farm income per capita:</Text> $
+      {numberWithCommas(totalOffFarm / CalculatedTotalHouseSize)}
+      <Text>Crops produced per capita:</Text> $
+      {numberWithCommas(totalCropProduceValue / CalculatedTotalHouseSize)}
+      <Text>Farm production per capita: </Text> $
+      {numberWithCommas(totalFarmProduceValue / CalculatedTotalHouseSize)}
+      <Text>Debts:</Text>
+      <DebtBar data={HouseHoldDebt} />
       <Text>Land</Text>
       <TwoColumnGrid>
         <div>
-          <RoundDisplay>{totalCultivatedLand.toFixed(2)} ha</RoundDisplay>
+          <RoundDisplay>{totalCultivatedLand} ha</RoundDisplay>
           <p>Cultivated</p>
         </div>
         <div>
-          <RoundDisplay>{totalOwnedLand.toFixed(2)} ha</RoundDisplay>
+          <RoundDisplay>{totalOwnedLand} ha</RoundDisplay>
           <p>Owned</p>
         </div>
       </TwoColumnGrid>

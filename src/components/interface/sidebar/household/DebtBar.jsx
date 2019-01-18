@@ -22,12 +22,7 @@ const BarItem = styled.div`
       ? (props.width * 2).toFixed(2) + "%"
       : props.width.toFixed(2) + "%"};
   top: 0;
-  left: ${props =>
-    props.min === props.value
-      ? 0
-      : props.value < props.max
-      ? (props.min / props.total) * 100
-      : 100 - props.width}%;
+  left: ${props => (props.min === props.value ? 0 : 100 - props.width)}%;
   z-index: 10;
   height: 35px;
   position: absolute;
@@ -37,19 +32,19 @@ const BarItem = styled.div`
 
   :first-child {
     background-color: ${props =>
-      Number(props.width) > 50
+      props.max === props.value
         ? themeConfig.color.primary
         : themeConfig.color.lightGrey};
   }
   :nth-child(2) {
     background-color: ${props =>
-      Number(props.width) > 50
+      props.max === props.value
         ? themeConfig.color.primary
         : themeConfig.color.grey};
   }
   :nth-child(3) {
     background-color: ${props =>
-      Number(props.width) > 50
+      props.max === props.value
         ? themeConfig.color.primary
         : themeConfig.color.lightGrey};
   }
@@ -57,11 +52,8 @@ const BarItem = styled.div`
 
 const Text = styled.p`
   width: ${props => props.width.toFixed(2) + "%"};
-  transform: translateX(
-    -${props => (Number(props.width) / Number(props.parentWidth)) * 100}%
-  );
   top: 30px;
-  left: ${props => (Number(props.width) / props.parentWidth) * 100}%;
+  left: ${props => (props.min === props.value ? 0 : 100 - props.width)}%;
   z-index: 10;
   height: 35px;
   position: absolute;
@@ -71,55 +63,46 @@ const Text = styled.p`
 export default class HouseHoldBar extends Component {
   constructor(props) {
     super();
-    this.barRef = React.createRef();
+    this.debtBar = React.createRef();
 
     this.state = {
       barWidth: 0,
-      currData: props.data
+      currData: props.data,
+      minNumber: 0
     };
   }
 
   componentDidMount() {
-    const barWidthNumber = this.barRef.current.getBoundingClientRect().width;
-    const FilteredData = d3
-      .nest()
-      .key(d => (d.key.split(" ")[1] ? d.key.split(" ")[1] : d.key))
-      .rollup(v => v.map(d => d3.sum(v, d => d.size)))
-      .entries(this.props.data);
-
+    const barWidthNumber = this.debtBar.current.getBoundingClientRect().width;
     this.setState({
-      barWidth: barWidthNumber,
-      filterData: FilteredData
+      barWidth: barWidthNumber
     });
   }
 
   render() {
-    const totalSize = d3.sum(this.props.data, d => d.size);
-    const minNumber = d3.min(this.props.data, d => d.size);
-    const maxNumber = d3.max(this.props.data, d => d.size);
-    if (this.state.filterData) {
-      this.state.filterData.map(items => console.log(items.value[0]));
-    }
+    const totalSize = d3.sum(this.props.data, d => d.values.length);
+    const minNumber = d3.min(this.props.data, d => d.values.length);
+    const maxNumber = d3.max(this.props.data, d => d.values.length);
     return (
-      <Bar className={"stacked-bar"} ref={this.barRef}>
+      <Bar className={"stacked-bar"} ref={this.debtBar}>
         {this.state.barWidth &&
           this.props.data.map(item => (
             <Fragment key={item.key + Math.random(1000)}>
               <BarItem
                 key={item.key + Math.random(1000)}
                 parentWidth={this.state.barWidth}
-                width={(item.size / totalSize) * 100}
                 min={minNumber}
                 max={maxNumber}
-                value={item.size}
                 total={totalSize}
+                value={item.values.length}
+                width={(item.values.length / totalSize) * 100}
               >
-                {((item.size / totalSize) * 100).toFixed(2)}%
+                {((item.values.length / totalSize) * 100).toFixed(2)}%
               </BarItem>
               <Text
                 key={item.key + Math.random(1000)}
                 parentWidth={this.state.barWidth}
-                width={(item.size / totalSize) * 100}
+                width={(item.values.length / totalSize) * 100}
               >
                 {item.key}
               </Text>

@@ -15,6 +15,5 @@ const Title = styled.h1`
 `;
 
 export default function CountryTitle(props) {
-  console.log(props.data);
   return <Title>{props.data}</Title>;
 }

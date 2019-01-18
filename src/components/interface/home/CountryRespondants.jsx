@@ -31,7 +31,6 @@ const SubCard = styled.div`
 `;
 
 export default function CountryRespondants(props) {
-  console.log(props.respondants);
   return (
     <Card>
       <h5>RHOMIS response</h5>
