@@ -23,10 +23,15 @@ const MenuItem = styled.li`
   font-size: 1em;
   margin: 0.5em 0;
   color: ${themeConfig.color.secondary};
+  cursor: pointer;
 
   &.active {
     background-color: ${themeConfig.color.secondary};
     color: white;
+
+    svg {
+      color: white;
+    }
   }
   :hover {
     background-color: ${themeConfig.color.secondary};
@@ -55,13 +60,9 @@ export class Menu extends Component {
             <MenuItem
               onClick={this.handleClick}
               label={"income"}
-              className={
-                activeMenuItem === "income"
-                  ? "active"
-                  : console.log(activeMenuItem)
-              }
+              className={activeMenuItem === "income" ? "active" : ""}
             >
-              Income
+              <img src="/img/household_icon.svg" />
             </MenuItem>
             <MenuItem
               onClick={this.handleClick}
@@ -70,7 +71,7 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "crops" ? "active" : ""
               }
             >
-              Crops
+              <img src="/img/crops_icon.svg" />
             </MenuItem>
 
             <MenuItem
@@ -80,7 +81,7 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "poverty" ? "active" : ""
               }
             >
-              Poverty
+              <img src="/img/poverty_icon.svg" />
             </MenuItem>
           </Fragment>
         )}

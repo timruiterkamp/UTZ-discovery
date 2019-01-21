@@ -78,16 +78,6 @@ export default function HouseHold(props) {
     .key(d => d.farm_income.replace(".", ","))
     .entries(props.data);
 
-  const cropProduceValue = d3
-    .nest()
-    .key(d => d.valuecropproduce.replace(".", ","))
-    .entries(props.data);
-
-  const cropfarmValue = d3
-    .nest()
-    .key(d => d.valuefarmproduce.replace(".", ","))
-    .entries(props.data);
-
   const CultivatedLand = d3
     .nest()
     .key(d => d.landcultivated)
@@ -108,8 +98,6 @@ export default function HouseHold(props) {
   const totalNumber = d3.sum(totalIncome, d => parseInt(d.key));
   const totalFarm = d3.sum(totalFarmIncome, d => parseInt(d.key));
   const totalOffFarm = d3.sum(totalOffFarmIncome, d => parseInt(d.key));
-  const totalCropProduceValue = d3.sum(cropProduceValue, d => parseInt(d.key));
-  const totalFarmProduceValue = d3.sum(cropfarmValue, d => parseInt(d.key));
   const StandardHouseSize = d3.deviation(HouseHoldSize, d => parseInt(d.key));
   const MinMaxHouseSize = d3.extent(HouseHoldSize, d => parseInt(d.key));
   const TotalHouseSize = HouseHoldSize.map(d => ({
@@ -160,10 +148,6 @@ export default function HouseHold(props) {
       {numberWithCommas(totalFarm / CalculatedTotalHouseSize)}
       <Text>off farm income per capita:</Text> $
       {numberWithCommas(totalOffFarm / CalculatedTotalHouseSize)}
-      <Text>Crops produced per capita:</Text> $
-      {numberWithCommas(totalCropProduceValue / CalculatedTotalHouseSize)}
-      <Text>Farm production per capita: </Text> $
-      {numberWithCommas(totalFarmProduceValue / CalculatedTotalHouseSize)}
       <Text>Debts:</Text>
       <DebtBar data={HouseHoldDebt} />
       <Text>Land</Text>

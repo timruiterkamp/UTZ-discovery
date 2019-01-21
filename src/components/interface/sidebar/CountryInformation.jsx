@@ -2,13 +2,10 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
-import CountyFiltering from "./household/CountyFiltering";
-import CountyCropses from "./household/CountyCropses";
-import LandStatistics from "./household/LandStatistics";
 import HouseHold from "./household/HouseHold";
-import TotalIncome from "./household/TotalIncome";
 import Menu from "./Menu";
 import CropsesData from "./cropses/CropsesData";
+import Poverty from "./poverty/Poverty";
 
 // import { setCountryDetailInformation } from "../../../store/reducers/data/DataActions";
 
@@ -96,16 +93,11 @@ export class CountryInformation extends Component {
           )}
 
           {activeMenuItem === "crops" && (
-            <Fragment>
-              <Text>Cropses data</Text>
-              <CropsesData data={activeCountry.data} />
-            </Fragment>
+            <CropsesData data={activeCountry.data} />
           )}
 
-          {activeMenuItem === "income" && (
-            <Fragment>
-              <Text>Income</Text>
-            </Fragment>
+          {activeMenuItem === "poverty" && (
+            <Poverty data={activeCountry.data} />
           )}
         </ContentBox>
       </SideBar>

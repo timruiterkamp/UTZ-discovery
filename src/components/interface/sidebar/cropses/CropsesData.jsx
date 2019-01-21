@@ -13,61 +13,94 @@ const Text = styled.p`
   font-weight: 700;
 `;
 
-const RoundDisplay = styled.div`
-  height: 100px;
-  width: 100px;
-  background-color: ${themeConfig.color.lightGrey};
-  border-radius: 50%;
-  color: ${themeConfig.color.secondary};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-`;
-
-const TwoColumnGrid = styled.section`
-  display: flex;
-  flex-direction: row;
-  width: 40%;
-  justify-content: space-between;
-  div {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-const HouseHoldTypeList = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  list-style-type: none;
-  text-align: center;
-`;
 export default function CropsesData(props) {
   const CropsData = d3
     .nest()
     .key(d => d.crops_all)
-    .rollup(v => v.key)
+    .entries(props.data)
+    .map(d => d.key.split(" "));
+
+  const FertiliserType = d3
+    .nest()
+    .key(d => d.fertiliser_type)
     .entries(props.data);
 
-  // function numberWithCommas(x) {
-  //   const transformedNumber = x
-  //     .toString()
-  //     .replace(".", ",")
-  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  //   return parseInt(transformedNumber);
-  // }
+  const HouseHoldSize = d3
+    .nest()
+    .key(d => d.HHsizemembers.replace(".", ","))
+    .entries(props.data);
 
-  // const totalNumber = d3.sum(totalIncome, d => parseInt(d.key));
+  const cropProduceValue = d3
+    .nest()
+    .key(d => d.valuecropproduce.replace(".", ","))
+    .entries(props.data);
 
-  console.log(CropsData);
+  const IrrigationMethod = d3
+    .nest()
+    .key(d => d.Irrigation_method)
+    .entries(props.data);
+
+  const cropfarmValue = d3
+    .nest()
+    .key(d => d.valuefarmproduce.replace(".", ","))
+    .entries(props.data);
+  const TotalHouseSize = HouseHoldSize.map(d => ({
+    key: d.key,
+    size: d.values.length
+  }));
+  const FertiliserAmount = FertiliserType.map(d => ({
+    key: d.key,
+    size: d.values.length,
+    percentage: (d.values.length / props.data.length) * 100
+  }));
+  const IrrigationMethodAmount = IrrigationMethod.map(d => ({
+    key: d.key,
+    size: d.values.length,
+    percentage: (d.values.length / props.data.length) * 100
+  }));
+  const CalculatedTotalHouseSize = d3.sum(
+    TotalHouseSize,
+    d => parseInt(d.key) * d.size
+  );
+
+  const totalCropProduceValue = d3.sum(cropProduceValue, d => parseInt(d.key));
+  const totalFarmProduceValue = d3.sum(cropfarmValue, d => parseInt(d.key));
+
+  function numberWithCommas(x) {
+    const transformedNumber = x
+      .toString()
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parseInt(transformedNumber);
+  }
+
+  const totalNumber = CropsData.map(items => items.map(d => d));
+
+  console.log(IrrigationMethodAmount);
 
   return (
     <Grid className={"data-overview "}>
       <Text> Top crops</Text>
+      <Text>Crops produced per capita:</Text> $
+      {numberWithCommas(totalCropProduceValue / CalculatedTotalHouseSize)}
+      <Text>Farm production per capita: </Text> $
+      {numberWithCommas(totalFarmProduceValue / CalculatedTotalHouseSize)}
+      <Text>Agric input use </Text>
+      <ul>
+        {FertiliserAmount.map(items => (
+          <li key={items.key + Math.random(1000)}>
+            {items.key}: {items.percentage.toFixed(1)}%
+          </li>
+        ))}
+      </ul>
+      <Text>Irrigation </Text>
+      <ul>
+        {IrrigationMethodAmount.map(items => (
+          <li key={items.key + Math.random(1000)}>
+            {items.key}: {items.percentage.toFixed(1)}%
+          </li>
+        ))}
+      </ul>
     </Grid>
   );
 }

@@ -10,12 +10,6 @@ const Bar = styled.div`
   padding: 2em 0;
 `;
 
-const barContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
 const BarItem = styled.div`
   width: ${props =>
     props.width < 10
@@ -97,9 +91,6 @@ export default class HouseHoldBar extends Component {
     const totalSize = d3.sum(this.props.data, d => d.size);
     const minNumber = d3.min(this.props.data, d => d.size);
     const maxNumber = d3.max(this.props.data, d => d.size);
-    if (this.state.filterData) {
-      this.state.filterData.map(items => console.log(items.value[0]));
-    }
     return (
       <Bar className={"stacked-bar"} ref={this.barRef}>
         {this.state.barWidth &&
