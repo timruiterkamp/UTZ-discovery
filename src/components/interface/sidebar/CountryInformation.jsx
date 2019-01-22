@@ -81,7 +81,7 @@ export class CountryInformation extends Component {
 
   render() {
     const { activeCountry, activeMenuItem } = this.props.state;
-
+    console.log(activeMenuItem);
     return (
       <SideBar>
         <Menu />

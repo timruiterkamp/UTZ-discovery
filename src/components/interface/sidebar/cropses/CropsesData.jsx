@@ -2,6 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
 import themeConfig from "../../../../theme/themeConfig";
+import Barchart from "../charts/Barchart";
 
 const Grid = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ const Text = styled.p`
 `;
 
 export default function CropsesData(props) {
+  console.log(props);
   const CropsData = d3
     .nest()
     .key(d => d.crops_all)
@@ -65,6 +67,10 @@ export default function CropsesData(props) {
 
   const totalCropProduceValue = d3.sum(cropProduceValue, d => parseInt(d.key));
   const totalFarmProduceValue = d3.sum(cropfarmValue, d => parseInt(d.key));
+  const profitPerCapita = [
+    { key: "Cropsales", percentage: totalCropProduceValue },
+    { key: "value crop produce", percentage: totalFarmProduceValue }
+  ];
 
   function numberWithCommas(x) {
     const transformedNumber = x
@@ -81,6 +87,8 @@ export default function CropsesData(props) {
   return (
     <Grid className={"data-overview "}>
       <Text> Top crops</Text>
+      <Text>Profit per capita</Text>
+      <Barchart data={profitPerCapita} prefix={"$"} />
       <Text>Crops produced per capita:</Text> $
       {numberWithCommas(totalCropProduceValue / CalculatedTotalHouseSize)}
       <Text>Farm production per capita: </Text> $

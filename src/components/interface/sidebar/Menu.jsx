@@ -42,14 +42,21 @@ const MenuItem = styled.li`
 export class Menu extends Component {
   constructor(props) {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.setToIncome = this.setToIncome.bind(this);
+    this.setToCrops = this.setToCrops.bind(this);
+    this.setToPoverty = this.setToPoverty.bind(this);
   }
   componentDidMount() {
     this.props.setSidebarMenu("income");
   }
-  handleClick(e) {
-    const newActiveItem = e.target.getAttribute("label");
-    this.props.setSidebarMenu(newActiveItem);
+  setToIncome(e) {
+    this.props.setSidebarMenu("income");
+  }
+  setToCrops(e) {
+    this.props.setSidebarMenu("crops");
+  }
+  setToPoverty(e) {
+    this.props.setSidebarMenu("poverty");
   }
   render() {
     const { activeMenuItem } = this.props.state;
@@ -58,14 +65,16 @@ export class Menu extends Component {
         {activeMenuItem && (
           <Fragment>
             <MenuItem
-              onClick={this.handleClick}
+              onClick={this.setToIncome}
               label={"income"}
-              className={activeMenuItem === "income" ? "active" : ""}
+              className={
+                this.props.state.activeMenuItem === "income" ? "active" : ""
+              }
             >
               <img src="/img/household_icon.svg" />
             </MenuItem>
             <MenuItem
-              onClick={this.handleClick}
+              onClick={this.setToCrops}
               label={"crops"}
               className={
                 this.props.state.activeMenuItem === "crops" ? "active" : ""
@@ -75,7 +84,7 @@ export class Menu extends Component {
             </MenuItem>
 
             <MenuItem
-              onClick={this.handleClick}
+              onClick={this.setToPoverty}
               label={"poverty"}
               className={
                 this.props.state.activeMenuItem === "poverty" ? "active" : ""
