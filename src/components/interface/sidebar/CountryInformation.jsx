@@ -62,7 +62,7 @@ export class CountryInformation extends Component {
   state = {
     zoomed: false,
     currCountry: null,
-    alreadyInComparison: false
+    alreadyInComparison: []
   };
 
   handleClick = () => {
@@ -83,22 +83,31 @@ export class CountryInformation extends Component {
     });
   };
 
-  setForCompare = () => {
-    function checkIfExists(a, b) {
-      return a.indexOf(b) !== -1;
-    }
+  checkIfExists = (a, b) => {
+    return a.indexOf(b) !== -1;
+  };
 
+  setForCompare = () => {
     if (
-      checkIfExists(
+      this.checkIfExists(
         this.props.state.comparedItems,
         this.props.state.activeCountry
       )
     ) {
       console.log("bestaat al");
+      this.setState({
+        alreadyInComparison: [
+          ...this.state.alreadyInComparison,
+          this.props.state.activeCountry
+        ]
+      });
     } else {
       this.props.setCompareItems(this.props.state.activeCountry);
       this.setState({
-        alreadyInComparison: true
+        alreadyInComparison: [
+          ...this.state.alreadyInComparison,
+          this.props.state.activeCountry
+        ]
       });
     }
   };
@@ -117,9 +126,19 @@ export class CountryInformation extends Component {
             <Button onClick={this.handleClick}>Bekijk per regio</Button>
             <Button
               onClick={this.setForCompare}
-              color={this.state.alreadyInComparison ? "#f58d8d" : "#1a1a1a"}
+              color={
+                this.checkIfExists(
+                  this.props.state.comparedItems,
+                  this.props.state.activeCountry
+                )
+                  ? "#f58d8d"
+                  : "#1a1a1a"
+              }
             >
-              {this.state.alreadyInComparison
+              {this.checkIfExists(
+                this.props.state.comparedItems,
+                this.props.state.activeCountry
+              )
                 ? "Verwijderen uit vergelijking"
                 : "Toevoegen aan vergelijken"}
             </Button>
