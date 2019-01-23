@@ -12,7 +12,8 @@ export default class BarchartHorizontal extends Component {
             label: "value",
             data: props.data
               .sort((a, b) => a.key - b.key)
-              .map(d => d.percentage.toFixed(1))
+              .map(d => d.percentage.toFixed(1)),
+            backgroundColor: "#F7D73B"
           }
         ]
       }
@@ -30,7 +31,8 @@ export default class BarchartHorizontal extends Component {
               label: "value",
               data: this.props.data
                 .sort((a, b) => a.key - b.key)
-                .map(d => d.percentage.toFixed(1))
+                .map(d => d.percentage.toFixed(1)),
+              backgroundColor: "#F7D73B"
             }
           ]
         }

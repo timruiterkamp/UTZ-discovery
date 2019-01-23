@@ -6,7 +6,8 @@ const initialState = {
   activeCounty: null,
   countyData: null,
   map: null,
-  svg: null
+  svg: null,
+  compareItems: []
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         mapLoaded: action.value
+      };
+    case "SET_COMPARE_ITEMS":
+      return {
+        ...state,
+        compareItems: [...state.compareItems, action.value]
       };
     case "SET_RHOMIS_DATA":
       return {

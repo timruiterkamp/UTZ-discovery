@@ -7,7 +7,7 @@ import Menu from "./Menu";
 import CropsesData from "./cropses/CropsesData";
 import Poverty from "./poverty/Poverty";
 
-// import { setCountryDetailInformation } from "../../../store/reducers/data/DataActions";
+import { setCompareItems } from "../../../store/reducers/data/DataActions";
 
 const SideBar = styled.section`
   width: 35vw;
@@ -35,12 +35,12 @@ const ContentBox = styled.div`
 // `;
 
 const Button = styled.button`
-  width: 100%;
+  width: 50%;
   margin: 0 auto;
   border: 1px solid ${themeConfig.color.grey};
   padding: 0.5em 1em;
   background: transparent;
-  font-size: 1.25em;
+  font-size: 1em;
   transition: 0.3s ease-in-out;
   font-family: ${themeConfig.font.text};
   cursor: pointer;
@@ -49,6 +49,11 @@ const Button = styled.button`
     background-color: ${themeConfig.color.primary};
     border: 1px solid ${themeConfig.color.primary};
   }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: row;
 `;
 
 export class CountryInformation extends Component {
@@ -75,19 +80,26 @@ export class CountryInformation extends Component {
     });
   };
 
+  setForCompare = () => {
+    this.props.setCompareItems(this.props.state.activeCountry);
+  };
+
   componentWillUnmount() {
     this.setState({ zoomed: false });
   }
 
   render() {
     const { activeCountry, activeMenuItem } = this.props.state;
-    console.log(activeMenuItem);
     return (
       <SideBar>
         <Menu />
         <ContentBox>
-          <Button onClick={this.handleClick}>Bekijk per regio</Button>
-
+          <ButtonContainer>
+            <Button onClick={this.handleClick}>Bekijk per regio</Button>
+            <Button onClick={this.setForCompare}>
+              Toevoegen aan vergelijken
+            </Button>
+          </ButtonContainer>
           {activeMenuItem === "income" && (
             <HouseHold data={activeCountry.data} />
           )}
@@ -115,7 +127,7 @@ const mapStateToProps = state => {
   };
 };
 
-const actions = {};
+const actions = { setCompareItems };
 
 export default connect(
   mapStateToProps,

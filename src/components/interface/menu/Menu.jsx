@@ -29,7 +29,11 @@ const MenuImageContainer = styled.div`
 const MenuImage = styled.img`
   height: 20px;
 `;
-export class Menu extends Component {
+export class NavigationMenu extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props.state);
+  }
   render() {
     return (
       <MenuLayout>
@@ -59,11 +63,12 @@ export class Menu extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => {
+  return {
+    state: {
+      comparedItems: state.data.compareItems
+    }
+  };
+};
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Menu);
+export default connect(mapStateToProps)(NavigationMenu);

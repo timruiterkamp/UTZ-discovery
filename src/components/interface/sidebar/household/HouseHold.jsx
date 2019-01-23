@@ -12,9 +12,11 @@ const Grid = styled.div`
   flex-direction: column;
   color: #3a3a3a;
 `;
-const Text = styled.p`
-  font-size: 1em;
+const Text = styled.h4`
+  font-size: 1.25em;
+  padding-top: 2em;
   font-weight: 700;
+  font-family: ${themeConfig.font.title};
 `;
 
 const RoundDisplay = styled.div`
@@ -139,12 +141,6 @@ export default function HouseHold(props) {
     (totalNumber / CalculatedTotalHouseSize).toString().replace(".", ",")
   ).toFixed(0);
 
-  // console.log(
-  //   filteredTotalNumber,
-  //   totalNumber,
-  //   totalNumber / CalculatedTotalHouseSize,
-  //   CalculatedTotalHouseSize
-  // );
   return (
     <Grid className={"data-overview "}>
       <Text>Income per capita: ${filteredTotalNumber}</Text>
@@ -156,7 +152,7 @@ export default function HouseHold(props) {
       <Text>Debts (yes, no or not available)</Text>
       <BarchartHorizontal data={HouseHoldDebtPercentage} />
 
-      <Text> Household (amount)</Text>
+      <Text> Household type(amount)</Text>
       <BarchartHorizontal data={HouseHoldTypes} />
       <Text>Household size (amount)</Text>
       <LineChart data={HouseHoldTypes} number={false} />

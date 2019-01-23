@@ -9,6 +9,7 @@
     "react": "^16.6.3",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.6.3",
+    "react-icons": "^3.3.0",
     "react-loader-spinner": "^2.3.0",
     "react-mapbox-gl": "^4.0.2",
     "react-redux": "^6.0.0",

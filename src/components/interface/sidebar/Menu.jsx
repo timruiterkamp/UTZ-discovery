@@ -8,9 +8,18 @@ const MenuBar = styled.nav`
   display: flex;
   flex-direction: column;
   background-color: #f1f1f1;
-  height: 100%;
+  height: 100vh;
   align-items: center;
   padding-top: 35px;
+  position: relative;
+  width: 100px;
+
+  ul {
+    position: fixed;
+    top: 35px;
+    /* margin: 0; */
+    padding: 0;
+  }
 `;
 const MenuItem = styled.li`
   width: 70px;
@@ -24,6 +33,10 @@ const MenuItem = styled.li`
   margin: 0.5em 0;
   color: ${themeConfig.color.secondary};
   cursor: pointer;
+
+  img {
+    position: absolute;
+  }
 
   &.active {
     background-color: ${themeConfig.color.secondary};
@@ -63,7 +76,7 @@ export class Menu extends Component {
     return (
       <MenuBar>
         {activeMenuItem && (
-          <Fragment>
+          <ul>
             <MenuItem
               onClick={this.setToIncome}
               label={"income"}
@@ -104,7 +117,7 @@ export class Menu extends Component {
                 <img src="/img/poverty_icon.svg" alt="poverty icon" />
               )}
             </MenuItem>
-          </Fragment>
+          </ul>
         )}
       </MenuBar>
     );

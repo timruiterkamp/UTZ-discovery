@@ -54,6 +54,13 @@ function setSVG(value) {
   };
 }
 
+function setCompareItem(value) {
+  return {
+    type: "SET_COMPARE_ITEMS",
+    value
+  };
+}
+
 export const setDataLoaded = dataStatus => dispatch => {
   dispatch(dataLoaded(dataStatus));
 };
@@ -84,4 +91,8 @@ export const setMap = data => dispatch => {
 
 export const setBaseSVG = data => dispatch => {
   dispatch(setSVG(data));
+};
+
+export const setCompareItems = data => dispatch => {
+  dispatch(setCompareItem(data));
 };

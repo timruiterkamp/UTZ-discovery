@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
-// import themeConfig from "../../../../theme/themeConfig";
+import themeConfig from "../../../../theme/themeConfig";
 import BarchartHorizontal from "../charts/BarchartHorizontal";
 import LineChart from "../charts/LineChart";
 
@@ -10,9 +10,11 @@ const Grid = styled.div`
   flex-direction: column;
   color: #3a3a3a;
 `;
-const Text = styled.p`
-  font-size: 1em;
+const Text = styled.h4`
+  font-size: 1.25em;
+  padding-top: 2em;
   font-weight: 700;
+  font-family: ${themeConfig.font.title};
 `;
 
 export default function Poverty(props) {
