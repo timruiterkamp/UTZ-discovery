@@ -8,12 +8,15 @@ The product can be found here: [https://utz-discovery.netlify.com](https://utz-d
 
 - [Installation of the project](#Installation-of-the-project)
 - [Overview project](#Overview-research-case)
-- [Data filtering](#Outcome-after-all-the-filtering-)
-- [Result](#endresult-)
+  - [How did you get here?](#How-did-you-get-here)
+  - [Main challenge](#Main-challenge)
+  - [The sub-challenge we chose to focus on](#The-sub-challenge-we-chose-to-focus-on)
+  - [How does our product cover this challenge?](#How-does-our-product-cover-this-challenge)
+- [Journey](#Journey)
+- [How did I filter the data](#How-did-I-filter-the-data)
 - [Conclusion](#Conclusion)
 - [Techniques used](#Techniques-used)
 - [Code description](#Code-description)
-- [Honorable mentions](#Honorable-mentions)
 - [Sources](#Sources)
 - [Todo / issues](#todo--issues)
 
@@ -28,7 +31,7 @@ npm run dev or yarn start
 
 # Overview case
 
-## How did you get here?
+## How did you get here
 
 At the University of Applied Sciences Amsterdam me and my team got the possibility to visualize the Rhomis Dataset to give insight to Rainforest Alliance and UTZ. The dataset consists of 18000 farmers around the world with over 740 variables per farmer. This is a lot of data and the client didn't have any way to view this data.
 
@@ -38,7 +41,7 @@ So me and my team were on the same line from the start and start developing a ge
 
 "Help us to better understand and explain how small farmers make a living (and how RA can better support them) "
 
-## The sub-challenge we chose to focus on:
+## The sub-challenge we chose to focus on
 
 Describe the social, demographic and economic characteristics of farmer households in particular countries, timeframes or for particular crops.
 
@@ -47,7 +50,7 @@ Describe the social, demographic and economic characteristics of farmer househol
 This tool basically shows RHoMIS data on a map. The user can select countries and/
 or regions on this map to see the data they contain. They can also compare data from different countries or regions. The data that the different places contain are mainly about households, incomes, crops, crop care and also a bit about poverty. In short, this tool shows the social, demographic and economic characteristics of farmer households around the world, based on RHoMIS data. Exploring and searching through this interactive data tool hopefully helps UTZ Rainforest Alliance to better understand how these farmers make a living.
 
-# journey 🗺 ️
+# Journey 🗺 ️
 
 So a big part of this product is the interactive world part and the ability to compare different countries with eachother.
 
@@ -136,28 +139,24 @@ The product has been really fun to make, the data was fun to work with and it wa
 
 ## Code description
 
-| Files                       | Description                                                         |
-| --------------------------- | ------------------------------------------------------------------- |
-| index.html                  | Base of the code where the application is setup                     |
-| ./src/\*                    | Folder with all the scripts and styling                             |
-| ./src/scripts               | Folder with all the scripts                                         |
-| ./src/scripts/index         | The initialize file of the map and charts                           |
-| ./src/scripts/stateData     | The file where the data is being filtered                           |
-| ./src/scripts/vueSetup      | The file where the Vue is being initialized and state is being made |
-| ./src/scripts/interactions  | The file where the interactions of the elements take place          |
-| ./src/styles                | Folder with all the styling                                         |
-| ./src/styles/index.css      | Folder with all the styling                                         |
-| ./dist/                     | Folder with the compiled code                                       |
-| ./dist/index                | Webpack code                                                        |
-| ./dist/wps-hmr              | Webpack config code                                                 |
-| ./dist/index.css            | compiled styling                                                    |
-| ./data/                     | Folder with all the data files                                      |
-| ./data/countryItems.json    | File with all the products per country                              |
-| ./data/europeDebt.csv       | File with all the debt per country                                  |
-| ./data/totalPopulation.json | File with the population per country                                |
-| ./data/worldGeoCodes.json   | File with all the geocodes per country                              |
-| ./gh-images                 | Folder with the images used in the readme                           |
-| ./assets                    | Folder with the icons used in the application                       |
+| Files                         | Description                                   |
+| ----------------------------- | --------------------------------------------- |
+| index.js                      | React base                                    |
+| ./src/\*                      | Folder with all the scripts and styling       |
+| ./src/components              | Folder with all the scripts                   |
+| ./src/components/filters      | Folder with all the filter files              |
+| ./src/components/interface    | Folder with all the interface files           |
+| ./src/components/layout       | Folder with all the layout files              |
+| ./src/components/pages        | Folder with all the page files                |
+| ./src/data                    | Folder with all the data                      |
+| ./src/routes                  | Folder with all the routing                   |
+| ./src/data/rhomis-data.csv    | File with all the farmers                     |
+| ./src/data/worldGeoCodes.json | File with all the geocodes per country        |
+| ./src/store/                  | Folder with the redux store                   |
+| ./src/theme/                  | Folder with global theme file                 |
+| ./src/utils/                  | Folder with utilities                         |
+| ./gh-images                   | Folder with the images used in the readme     |
+| ./assets                      | Folder with the icons used in the application |
 
 ## Sources
 
