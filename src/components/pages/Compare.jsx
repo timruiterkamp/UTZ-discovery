@@ -75,12 +75,14 @@ export class Compare extends Component {
         this.props.state.comparedItems.length ? (
           <Fragment>
             <GoBack>
-              {" "}
-              <FiMinimize2 />
+              <Link to={"/"}>
+                <FiMinimize2 />
+              </Link>
             </GoBack>
             <Menu />
             {this.props.state.comparedItems.map(item => (
               <CompareItemScreen
+                key={item.country}
                 activeMenu={this.props.state.activeMenuItem}
                 country={item.country}
                 data={item.data}

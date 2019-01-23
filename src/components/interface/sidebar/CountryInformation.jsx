@@ -81,7 +81,20 @@ export class CountryInformation extends Component {
   };
 
   setForCompare = () => {
-    this.props.setCompareItems(this.props.state.activeCountry);
+    function checkIfExists(a, b) {
+      return a.indexOf(b) !== -1;
+    }
+
+    if (
+      checkIfExists(
+        this.props.state.comparedItems,
+        this.props.state.activeCountry
+      )
+    ) {
+      console.log("bestaat al");
+    } else {
+      this.props.setCompareItems(this.props.state.activeCountry);
+    }
   };
 
   componentWillUnmount() {
@@ -122,7 +135,8 @@ const mapStateToProps = state => {
     state: {
       activeCountry: state.data.activeCountry,
       map: state.data.map,
-      activeMenuItem: state.sidebarMenu.activeMenuItem
+      activeMenuItem: state.sidebarMenu.activeMenuItem,
+      comparedItems: state.data.compareItems
     }
   };
 };

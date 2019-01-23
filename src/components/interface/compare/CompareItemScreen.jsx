@@ -75,7 +75,12 @@ export class CompareItemScreen extends Component {
       <SideBar>
         <ContentBox>
           <CountryTitle>{this.props.country}</CountryTitle>
-          <Button onClick={this.removeCompareCountry}>X</Button>
+          <Button
+            onClick={this.removeCompareCountry(this.props.country)}
+            label={this.props.country}
+          >
+            X
+          </Button>
           {this.props.activeMenu === "income" && (
             <HouseHold data={this.props.data} />
           )}
@@ -98,7 +103,8 @@ const mapStateToProps = state => {
     state: {
       activeCountry: state.data.activeCountry,
       map: state.data.map,
-      activeMenuItem: state.sidebarMenu.activeMenuItem
+      activeMenuItem: state.sidebarMenu.activeMenuItem,
+      comparedItems: state.data.compareItems
     }
   };
 };

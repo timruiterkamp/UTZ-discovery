@@ -14,7 +14,11 @@ class Home extends Component {
     return (
       <Fragment>
         <LoadingScreen hidden={dataLoaded && mapLoaded} />
-        {dataLoaded && mapLoaded && <NavigationMenu />}
+        {dataLoaded && mapLoaded && (
+          <NavigationMenu
+            activeCompares={this.props.state.comparedItems.length}
+          />
+        )}
         {activeCountry && <CountryTitle data={activeCountry.country} />}
         {activeCountry && (
           <CountryRespondants respondants={activeCountry.data.length} />
@@ -31,7 +35,8 @@ const mapStateToProps = state => {
     state: {
       dataLoaded: state.data.dataLoaded,
       mapLoaded: state.data.mapLoaded,
-      activeCountry: state.data.activeCountry
+      activeCountry: state.data.activeCountry,
+      comparedItems: state.data.compareItems
     }
   };
 };

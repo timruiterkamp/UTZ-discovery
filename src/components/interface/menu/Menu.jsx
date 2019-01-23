@@ -29,17 +29,43 @@ const MenuImageContainer = styled.div`
 const MenuImage = styled.img`
   height: 20px;
 `;
-export class NavigationMenu extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props.state);
+const Counter = styled.div`
+  width: 35px;
+  height: 35px;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: -15px;
+  left: 43px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+  font-family: ${themeConfig.font.text};
+  animation: 0.3s fadeIn forwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
+`;
+export class NavigationMenu extends Component {
   render() {
+    console.log(this.props.activeCompares);
     return (
       <MenuLayout>
         <MenuItem>
           <MenuImageContainer>
             <Link to="/compare">
+              {this.props.activeCompares >= 1 && (
+                <Counter> {this.props.activeCompares}</Counter>
+              )}
               <MenuImage src="/img/compare.svg" alt="compare" />
             </Link>
           </MenuImageContainer>
