@@ -37,13 +37,15 @@ const ContentBox = styled.div`
 const Button = styled.button`
   width: 50%;
   margin: 0 auto;
-  border: 1px solid ${themeConfig.color.grey};
+  border: 1px solid ${props => props.color};
   padding: 0.5em 1em;
   background: transparent;
   font-size: 1em;
   transition: 0.3s ease-in-out;
   font-family: ${themeConfig.font.text};
   cursor: pointer;
+  outline: none;
+  color: ${props => props.color};
 
   :hover {
     background-color: ${themeConfig.color.primary};
@@ -59,7 +61,8 @@ const ButtonContainer = styled.div`
 export class CountryInformation extends Component {
   state = {
     zoomed: false,
-    currCountry: null
+    currCountry: null,
+    alreadyInComparison: false
   };
 
   handleClick = () => {
@@ -94,6 +97,9 @@ export class CountryInformation extends Component {
       console.log("bestaat al");
     } else {
       this.props.setCompareItems(this.props.state.activeCountry);
+      this.setState({
+        alreadyInComparison: true
+      });
     }
   };
 
@@ -109,8 +115,13 @@ export class CountryInformation extends Component {
         <ContentBox>
           <ButtonContainer>
             <Button onClick={this.handleClick}>Bekijk per regio</Button>
-            <Button onClick={this.setForCompare}>
-              Toevoegen aan vergelijken
+            <Button
+              onClick={this.setForCompare}
+              color={this.state.alreadyInComparison ? "#f58d8d" : "#1a1a1a"}
+            >
+              {this.state.alreadyInComparison
+                ? "Verwijderen uit vergelijking"
+                : "Toevoegen aan vergelijken"}
             </Button>
           </ButtonContainer>
           {activeMenuItem === "income" && (

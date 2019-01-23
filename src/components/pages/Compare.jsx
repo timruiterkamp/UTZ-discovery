@@ -42,7 +42,7 @@ const NoDataContainer = styled.section`
 `;
 
 const GoBack = styled.button`
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   top: 50%;
   left: 35px;
