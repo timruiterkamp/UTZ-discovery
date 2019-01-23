@@ -22,6 +22,18 @@ const SideBar = styled.section`
   grid-template-columns: 15% 85%;
   max-width: 35vw;
   overflow-x: hidden;
+  animation: 1s fadeIn forwards;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateX(100vw);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 `;
 
 const ContentBox = styled.div`

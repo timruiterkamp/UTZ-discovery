@@ -12,6 +12,15 @@ const Card = styled.div`
   z-index: 100;
   right: 37vw;
   bottom: 4vh;
+  animation: 0.5s fadeIn forwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
   h5 {
     font-weight: bold;

@@ -23,6 +23,15 @@ const Subtitle = styled.h3`
 
 const FilterContainer = styled.section`
   padding: 4em 8em;
+  animation: 0.5s fadeIn forwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 class Filter extends Component {
   componentDidMount() {
