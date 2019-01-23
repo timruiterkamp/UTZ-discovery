@@ -19,8 +19,6 @@ const MenuBar = styled.nav`
     top: 35px;
     /* margin: 0; */
     padding: 0;
-
-    left: 15px;
   }
 `;
 const MenuItem = styled.li`

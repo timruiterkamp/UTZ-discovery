@@ -8,7 +8,8 @@ const initialState = {
   map: null,
   svg: null,
   compareItems: [],
-  filters: []
+  filters: [],
+  introStatus: false
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -22,6 +23,11 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         mapLoaded: action.value
+      };
+    case "SET_INTRO_MESSAGE":
+      return {
+        ...state,
+        introStatus: action.value
       };
     case "SET_COMPARE_ITEMS":
       return {

@@ -5,6 +5,13 @@ function dataLoaded(value) {
   };
 }
 
+function introMessage(value) {
+  return {
+    type: "SET_INTRO_MESSAGE",
+    value
+  };
+}
+
 function mapLoaded(value) {
   return {
     type: "SET_MAP_LOADED",
@@ -106,4 +113,8 @@ export const setCompareItems = data => dispatch => {
 
 export const setGlobalFilters = data => dispatch => {
   dispatch(setFilter(data));
+};
+
+export const setIntroMessageStatus = data => dispatch => {
+  dispatch(introMessage(data));
 };
