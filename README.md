@@ -74,7 +74,7 @@ If you select the poverty icon, you will see the screen above with the Score ppi
 
 When you select a country for comparison, a number will show up above the compare icon. The number stands for the amount of active countries in the compare section.
 
-![Compare countries ](https://github.com/timruiterkamp/UTZ-discovery/blob/master/gh-images/compare-screen.jpg)
+![Compare countries ](https://github.com/timruiterkamp/UTZ-discovery/blob/master/gh-images/compare-screen.png)
 
 If you have selected like 3 countries, the above screen will be a visualization of the look and feel of the compare screen. The scroll, scrolls every section all at the same time and the menu is for all countries. So you can select poverty as in the global overview.
 
