@@ -1,8 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
-import themeConfig from "../../../../theme/themeConfig";
-import Barchart from "../charts/Barchart";
+// import themeConfig from "../../../../theme/themeConfig";
+import BarchartHorizontal from "../charts/BarchartHorizontal";
+import LineChart from "../charts/LineChart";
 
 const Grid = styled.div`
   display: flex;
@@ -40,16 +41,14 @@ export default function Poverty(props) {
 
   return (
     <Grid>
-      <Text>HFIAS Status</Text>
-      <Barchart data={HFIASamount} prefix="%" />
-      <Text>Irrigation </Text>
-      <ul>
-        {ScorePPIAmount.map(items => (
-          <li key={items.key + Math.random(1000)}>
-            {items.key}: {items.percentage.toFixed(1)}%
-          </li>
-        ))}
-      </ul>
+      <Text>HFIAS Status (percentage)</Text>
+      <BarchartHorizontal
+        data={HFIASamount}
+        prefix="%"
+        axisFormat="percentage"
+      />
+      <Text>Score PPI (percentage)</Text>
+      <LineChart data={ScorePPIAmount} number={true} />
     </Grid>
   );
 }

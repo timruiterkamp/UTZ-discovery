@@ -71,7 +71,7 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "income" ? "active" : ""
               }
             >
-              <img src="/img/household_icon.svg" />
+              <img src="/img/household_icon.svg" alt="household icon" />
             </MenuItem>
             <MenuItem
               onClick={this.setToCrops}
@@ -80,7 +80,7 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "crops" ? "active" : ""
               }
             >
-              <img src="/img/crops_icon.svg" />
+              <img src="/img/crops_icon.svg" alt="crops icon" />
             </MenuItem>
 
             <MenuItem
@@ -90,7 +90,7 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "poverty" ? "active" : ""
               }
             >
-              <img src="/img/poverty_icon.svg" />
+              <img src="/img/poverty_icon.svg" alt="poverty icon" />
             </MenuItem>
           </Fragment>
         )}

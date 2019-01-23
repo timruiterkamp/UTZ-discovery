@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
@@ -28,11 +28,11 @@ const ContentBox = styled.div`
   padding: 3em;
 `;
 
-const Text = styled.p`
-  font-size: 1em;
-  line-height: 1.5;
-  color: ${themeConfig.color.grey};
-`;
+// const Text = styled.p`
+//   font-size: 1em;
+//   line-height: 1.5;
+//   color: ${themeConfig.color.grey};
+// `;
 
 const Button = styled.button`
   width: 100%;

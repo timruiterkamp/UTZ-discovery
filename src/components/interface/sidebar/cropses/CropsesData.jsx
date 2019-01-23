@@ -1,8 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
-import themeConfig from "../../../../theme/themeConfig";
-import Barchart from "../charts/Barchart";
+// import themeConfig from "../../../../theme/themeConfig";
+import BarchartHorizontal from "../charts/BarchartHorizontal";
+import BarchartVertical from "../charts/BarchartVertical";
 
 const Grid = styled.div`
   display: flex;
@@ -15,12 +16,10 @@ const Text = styled.p`
 `;
 
 export default function CropsesData(props) {
-  console.log(props);
   const CropsData = d3
     .nest()
     .key(d => d.crops_all)
-    .entries(props.data)
-    .map(d => d.key.split(" "));
+    .entries(props.data);
 
   const FertiliserType = d3
     .nest()
@@ -42,9 +41,9 @@ export default function CropsesData(props) {
     .key(d => d.Irrigation_method)
     .entries(props.data);
 
-  const cropfarmValue = d3
+  const cropSalesValue = d3
     .nest()
-    .key(d => d.valuefarmproduce.replace(".", ","))
+    .key(d => d.cropsales.replace(".", ","))
     .entries(props.data);
   const TotalHouseSize = HouseHoldSize.map(d => ({
     key: d.key,
@@ -66,49 +65,44 @@ export default function CropsesData(props) {
   );
 
   const totalCropProduceValue = d3.sum(cropProduceValue, d => parseInt(d.key));
-  const totalFarmProduceValue = d3.sum(cropfarmValue, d => parseInt(d.key));
+  const totalCropsalesValue = d3.sum(cropSalesValue, d => parseInt(d.key));
   const profitPerCapita = [
-    { key: "Cropsales", percentage: totalCropProduceValue },
-    { key: "value crop produce", percentage: totalFarmProduceValue }
+    {
+      key: "Cropsales",
+      percentage: totalCropsalesValue / CalculatedTotalHouseSize
+    },
+    {
+      key: "value crop produce",
+      percentage: totalCropProduceValue / CalculatedTotalHouseSize
+    }
   ];
 
-  function numberWithCommas(x) {
-    const transformedNumber = x
-      .toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return parseInt(transformedNumber);
-  }
+  const FlattenedCropsData = [].concat.apply(
+    [],
+    CropsData.map(d => d.key.split(" "))
+  );
+  const FilteredCropsData = d3
+    .nest()
+    .key(d => d)
+    .entries(FlattenedCropsData);
 
-  const totalNumber = CropsData.map(items => items.map(d => d));
-
-  console.log(IrrigationMethodAmount);
+  const NewCropsDataset = FilteredCropsData.map(d => ({
+    key: d.key,
+    percentage: (d.values.length / props.data.length) * 100
+  }));
+  console.log(NewCropsDataset);
 
   return (
     <Grid className={"data-overview "}>
-      <Text> Top crops</Text>
-      <Text>Profit per capita</Text>
-      <Barchart data={profitPerCapita} prefix={"$"} />
-      <Text>Crops produced per capita:</Text> $
-      {numberWithCommas(totalCropProduceValue / CalculatedTotalHouseSize)}
-      <Text>Farm production per capita: </Text> $
-      {numberWithCommas(totalFarmProduceValue / CalculatedTotalHouseSize)}
-      <Text>Agric input use </Text>
-      <ul>
-        {FertiliserAmount.map(items => (
-          <li key={items.key + Math.random(1000)}>
-            {items.key}: {items.percentage.toFixed(1)}%
-          </li>
-        ))}
-      </ul>
-      <Text>Irrigation </Text>
-      <ul>
-        {IrrigationMethodAmount.map(items => (
-          <li key={items.key + Math.random(1000)}>
-            {items.key}: {items.percentage.toFixed(1)}%
-          </li>
-        ))}
-      </ul>
+      <Text> Top crops (percentage)</Text>
+      <BarchartVertical data={NewCropsDataset} />
+      <Text>Profit per capita (in dollars)</Text>
+      <BarchartHorizontal data={profitPerCapita} />
+
+      <Text>Agric input use (percentage)</Text>
+      <BarchartVertical data={FertiliserAmount} />
+      <Text>Irrigation (percentage)</Text>
+      <BarchartVertical data={IrrigationMethodAmount} />
     </Grid>
   );
 }

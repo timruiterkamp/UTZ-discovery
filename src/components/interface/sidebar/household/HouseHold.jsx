@@ -4,6 +4,9 @@ import styled from "styled-components";
 import HouseHoldBar from "./HouseHoldBar";
 import themeConfig from "../../../../theme/themeConfig";
 import DebtBar from "./DebtBar";
+import BarchartHorizontal from "../charts/BarchartHorizontal";
+import LineChart from "../charts/LineChart";
+
 const Grid = styled.div`
   display: flex;
   flex-direction: column;
@@ -87,14 +90,6 @@ export default function HouseHold(props) {
     .key(d => d.landowned)
     .entries(props.data);
 
-  function numberWithCommas(x) {
-    const transformedNumber = x
-      .toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return parseInt(transformedNumber);
-  }
-
   const totalNumber = d3.sum(totalIncome, d => parseInt(d.key));
   const totalFarm = d3.sum(totalFarmIncome, d => parseInt(d.key));
   const totalOffFarm = d3.sum(totalOffFarmIncome, d => parseInt(d.key));
@@ -118,39 +113,55 @@ export default function HouseHold(props) {
   );
   const HouseHoldTypes = HouseHoldTypeData.map(household => ({
     key: household.key.replace("_", " "),
-    size: household.values.length
+    percentage: household.values.length
   }));
+  const HouseHoldDebtPercentage = HouseHoldDebt.map(household => ({
+    key: household.key.replace("_", " "),
+    percentage: household.values.length
+  }));
+  const cropProduceValue = d3
+    .nest()
+    .key(d => d.valuecropproduce.replace(".", ","))
+    .entries(props.data);
 
+  const totalCropProduceValue = d3.sum(cropProduceValue, d => parseInt(d.key));
+
+  const profitPerPerson = [
+    { key: "farm", percentage: totalFarm / CalculatedTotalHouseSize },
+    { key: "Offarm", percentage: totalOffFarm / CalculatedTotalHouseSize },
+    {
+      key: "value produce",
+      percentage: totalCropProduceValue / CalculatedTotalHouseSize
+    }
+  ];
+
+  const filteredTotalNumber = parseInt(
+    (totalNumber / CalculatedTotalHouseSize).toString().replace(".", ",")
+  ).toFixed(0);
+
+  // console.log(
+  //   filteredTotalNumber,
+  //   totalNumber,
+  //   totalNumber / CalculatedTotalHouseSize,
+  //   CalculatedTotalHouseSize
+  // );
   return (
     <Grid className={"data-overview "}>
-      <Text>standard deviation:</Text>
-      {StandardHouseSize.toFixed(1)}
-      <Text>
-        Minimale huishoud grote: {MinMaxHouseSize[0]}, maximale huishoud grote:{" "}
-        {MinMaxHouseSize[1]}{" "}
-      </Text>
-      <Text>household types: </Text>
-      <HouseHoldBar data={HouseHoldTypes} />
-      <Text>Household types:</Text>
-      <HouseHoldTypeList>
-        {HouseHoldTypes
-          ? HouseHoldTypes.map(type => (
-              <li key={type.key}>
-                <strong>{type.key}</strong>
-                <p>{type.size}</p>
-              </li>
-            ))
-          : ""}
-      </HouseHoldTypeList>
-      <Text>Totaal per capita:</Text> $
-      {numberWithCommas(totalNumber / CalculatedTotalHouseSize)}
-      <Text>farm income per capita:</Text> $
-      {numberWithCommas(totalFarm / CalculatedTotalHouseSize)}
-      <Text>off farm income per capita:</Text> $
-      {numberWithCommas(totalOffFarm / CalculatedTotalHouseSize)}
-      <Text>Debts:</Text>
-      <DebtBar data={HouseHoldDebt} />
-      <Text>Land</Text>
+      <Text>Income per capita: ${filteredTotalNumber}</Text>
+      <BarchartHorizontal
+        data={profitPerPerson}
+        prefix={"$"}
+        axisFormat="money"
+      />
+      <Text>Debts (yes, no or not available)</Text>
+      <BarchartHorizontal data={HouseHoldDebtPercentage} />
+
+      <Text> Household (amount)</Text>
+      <BarchartHorizontal data={HouseHoldTypes} />
+      <Text>Household size (amount)</Text>
+      <LineChart data={HouseHoldTypes} number={false} />
+
+      <Text>Land (hectare)</Text>
       <TwoColumnGrid>
         <div>
           <RoundDisplay>{totalCultivatedLand} ha</RoundDisplay>
