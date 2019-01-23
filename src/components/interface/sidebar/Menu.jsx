@@ -71,7 +71,11 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "income" ? "active" : ""
               }
             >
-              <img src="/img/household_icon.svg" alt="household icon" />
+              {this.props.state.activeMenuItem === "income" ? (
+                <img src="/img/household_icon_w.svg" alt="household icon" />
+              ) : (
+                <img src="/img/household_icon.svg" alt="household icon" />
+              )}
             </MenuItem>
             <MenuItem
               onClick={this.setToCrops}
@@ -80,7 +84,11 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "crops" ? "active" : ""
               }
             >
-              <img src="/img/crops_icon.svg" alt="crops icon" />
+              {this.props.state.activeMenuItem === "crops" ? (
+                <img src="/img/crops_icon_w.svg" alt="crops icon" />
+              ) : (
+                <img src="/img/crops_icon.svg" alt="crops icon" />
+              )}
             </MenuItem>
 
             <MenuItem
@@ -90,7 +98,11 @@ export class Menu extends Component {
                 this.props.state.activeMenuItem === "poverty" ? "active" : ""
               }
             >
-              <img src="/img/poverty_icon.svg" alt="poverty icon" />
+              {this.props.state.activeMenuItem === "poverty" ? (
+                <img src="/img/poverty_icon_w.svg" alt="poverty icon" />
+              ) : (
+                <img src="/img/poverty_icon.svg" alt="poverty icon" />
+              )}
             </MenuItem>
           </Fragment>
         )}

@@ -11,7 +11,8 @@ const Grid = styled.div`
   color: #3a3a3a;
 `;
 const Text = styled.p`
-  font-size: 1em;
+  font-size: 1.25em;
+  padding-top: 2em;
   font-weight: 700;
 `;
 
