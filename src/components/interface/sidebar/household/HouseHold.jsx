@@ -87,6 +87,7 @@ export default function HouseHold(props) {
     .nest()
     .key(d => d.landcultivated)
     .entries(props.data);
+
   const OwnedLand = d3
     .nest()
     .key(d => d.landowned)
