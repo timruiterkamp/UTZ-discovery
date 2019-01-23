@@ -24,8 +24,6 @@ class Mapview extends Component {
     this.state = {
       currCountry: this.props.currentCountry
     };
-
-    console.log(this.state.currCountry);
     this.generateInformationTips = this.generateInformationTips.bind(this);
     this.project = this.project.bind(this);
     this.activeCurrentCountry = this.activeCurrentCountry.bind(this);

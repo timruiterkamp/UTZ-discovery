@@ -61,6 +61,13 @@ function setCompareItem(value) {
   };
 }
 
+function setFilter(value) {
+  return {
+    type: "SET_FILTER",
+    value
+  };
+}
+
 export const setDataLoaded = dataStatus => dispatch => {
   dispatch(dataLoaded(dataStatus));
 };
@@ -95,4 +102,8 @@ export const setBaseSVG = data => dispatch => {
 
 export const setCompareItems = data => dispatch => {
   dispatch(setCompareItem(data));
+};
+
+export const setGlobalFilters = data => dispatch => {
+  dispatch(setFilter(data));
 };
