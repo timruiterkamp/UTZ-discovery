@@ -135,7 +135,7 @@ export class CountryInformation extends Component {
         <Menu />
         <ContentBox>
           <ButtonContainer>
-            <Button onClick={this.handleClick}>Bekijk per regio</Button>
+            {/* <Button onClick={this.handleClick}>Bekijk per regio</Button> */}
             <Button
               onClick={this.setForCompare}
               color={
