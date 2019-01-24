@@ -33,7 +33,7 @@ const RoundDisplay = styled.div`
 const TwoColumnGrid = styled.section`
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 70%;
   justify-content: space-between;
   div {
     align-items: center;
@@ -81,6 +81,25 @@ export default function HouseHold(props) {
     .nest()
     .key(d => d.landowned)
     .entries(props.data);
+
+  const LandStatus = d3
+    .nest()
+    .key(d => d.land_tenure)
+    .entries(props.data);
+
+  const FlattenedLandStatusData = [].concat.apply(
+    [],
+    LandStatus.map(d => d.key.split(" "))
+  );
+  const FilteredLandStatusData = d3
+    .nest()
+    .key(d => d)
+    .entries(FlattenedLandStatusData);
+
+  const NewLandStatusDataset = FilteredLandStatusData.map(d => ({
+    key: d.key,
+    percentage: (d.values.length / props.data.length) * 10000
+  }));
 
   const totalNumber = d3.sum(totalIncome, d => parseInt(d.key));
   const totalFarm = d3.sum(totalFarmIncome, d => parseInt(d.key));
@@ -144,6 +163,9 @@ export default function HouseHold(props) {
       <BarchartHorizontal data={HouseHoldTypes} />
       <Text>Household size (amount)</Text>
       <LineChart data={TotalHouseSize} number={false} />
+
+      <Text>Land owned or rented</Text>
+      <BarchartHorizontal data={NewLandStatusDataset} />
 
       <Text>Land (hectare)</Text>
       <TwoColumnGrid>

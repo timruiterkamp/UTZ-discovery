@@ -92,7 +92,6 @@ export default function CropsesData(props) {
     key: d.key,
     percentage: (d.values.length / props.data.length) * 100
   }));
-  console.log(NewCropsDataset);
 
   return (
     <Grid className={"data-overview "}>
