@@ -17,7 +17,7 @@ const Button = styled.button`
   transition: 0.3s ease-in-out;
   font-weight: bold;
 
-  position: absolute;
+  position: fixed;
   top: -95px;
   left: -95px;
 

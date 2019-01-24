@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { setGlobalFilters } from "../../store/reducers/data/DataActions";
 import styled from "styled-components";
@@ -7,11 +7,13 @@ import * as d3 from "d3";
 import CheckBox from "./CheckBox";
 import SelectionBox from "./SelectionBox";
 import Radio from "./Radio";
+import { Link } from "react-router-dom";
 
 const FilterGrid = styled.div`
-  padding-top: 60px;
+  padding-top: 2em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
 
   ul {
     list-style-type: none;
@@ -72,6 +74,44 @@ const ButtonContainer = styled.div`
   align-items: center;
 `;
 
+const ResetButton = styled.button`
+  border: 1px solid white;
+  font-size: 0.8em;
+  font-family: ${themeConfig.font.text};
+  background-color: transparent;
+  padding: 0.5em 1em;
+  border-radius: 15px;
+  position: absolute;
+  right: 0;
+  top: -30px;
+  color: white;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${themeConfig.color.primary};
+    color: #000;
+  }
+`;
+
+const ApplyButton = styled.div`
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  bottom: -95px;
+  right: -95px;
+  background-color: ${themeConfig.color.primary};
+
+  a {
+    margin-left: 35px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: -60px;
+    color: black;
+  }
+`;
 export class FilterSelection extends Component {
   state = {
     checked: false,
@@ -129,9 +169,23 @@ export class FilterSelection extends Component {
     this.setState({ [name]: value });
   };
 
+  resetFilters = () => {
+    this.setState({ Female: false });
+  };
+
   render() {
     return (
       <FilterGrid>
+        {this.state.Female && (
+          <Fragment>
+            <ResetButton onClick={this.resetFilters}>
+              Reset filters X
+            </ResetButton>
+            <ApplyButton>
+              <Link to="/">Apply</Link>
+            </ApplyButton>
+          </Fragment>
+        )}
         <div>
           <Title>Houshold</Title>
           <p>Household head</p>
@@ -294,7 +348,7 @@ export class FilterSelection extends Component {
             options={["Januari"]}
           />
           <Title style={{ paddingTop: "2em" }}>Total farmers</Title>
-          <Title>17000</Title>
+          <Title>10.771</Title>
         </div>
       </FilterGrid>
     );

@@ -34,13 +34,9 @@ const FilterContainer = styled.section`
   }
 `;
 class Filter extends Component {
-  componentDidMount() {
-    if (this.props.state.rhomisData) {
-      const countryData = this.props.state.rhomisData.map(item => item.data);
-      const concattedData = countryData.map(items => items);
-      console.log(concattedData);
-    }
-  }
+  componentDidMount = () => {
+    console.log(this.props.state);
+  };
   render() {
     return (
       <FilterContainer>
@@ -48,7 +44,11 @@ class Filter extends Component {
 
         <Title>FILTER</Title>
         <Subtitle>Select the desired filters</Subtitle>
-        <FilterSelection />
+        <FilterSelection
+          totalFarmers={
+            this.props.state.rhomisData && this.props.state.rhomisData.length
+          }
+        />
       </FilterContainer>
     );
   }
