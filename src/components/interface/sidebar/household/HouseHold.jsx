@@ -1,9 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
-import HouseHoldBar from "./HouseHoldBar";
 import themeConfig from "../../../../theme/themeConfig";
-import DebtBar from "./DebtBar";
 import BarchartHorizontal from "../charts/BarchartHorizontal";
 import LineChart from "../charts/LineChart";
 
@@ -42,15 +40,6 @@ const TwoColumnGrid = styled.section`
     display: flex;
     flex-direction: column;
   }
-`;
-
-const HouseHoldTypeList = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  list-style-type: none;
-  text-align: center;
 `;
 export default function HouseHold(props) {
   const HouseHoldTypeData = d3
@@ -96,15 +85,13 @@ export default function HouseHold(props) {
   const totalNumber = d3.sum(totalIncome, d => parseInt(d.key));
   const totalFarm = d3.sum(totalFarmIncome, d => parseInt(d.key));
   const totalOffFarm = d3.sum(totalOffFarmIncome, d => parseInt(d.key));
-  const StandardHouseSize = d3.deviation(HouseHoldSize, d => parseInt(d.key));
-  const MinMaxHouseSize = d3.extent(HouseHoldSize, d => parseInt(d.key));
   const TotalHouseSize = HouseHoldSize.map(d => ({
     key: d.key,
-    size: d.values.length
+    percentage: d.values.length
   }));
   const CalculatedTotalHouseSize = d3.sum(
     TotalHouseSize,
-    d => parseInt(d.key) * d.size
+    d => parseInt(d.key) * d.percentage
   );
   const totalCultivatedLand = d3.sum(
     CultivatedLand,
@@ -156,7 +143,7 @@ export default function HouseHold(props) {
       <Text> Household type(amount)</Text>
       <BarchartHorizontal data={HouseHoldTypes} />
       <Text>Household size (amount)</Text>
-      <LineChart data={HouseHoldTypes} number={false} />
+      <LineChart data={TotalHouseSize} number={false} />
 
       <Text>Land (hectare)</Text>
       <TwoColumnGrid>

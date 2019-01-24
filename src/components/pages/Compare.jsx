@@ -8,6 +8,11 @@ import BackButton from "../interface/button/BackButton";
 import themeConfig from "../../theme/themeConfig";
 import { FiMinimize2 } from "react-icons/fi";
 
+import {
+  setCompareItems,
+  deleteCompareItems
+} from "../../store/reducers/data/DataActions";
+
 const CompareContainer = styled.section`
   display: flex;
   flex-direction: row;
@@ -86,6 +91,7 @@ export class Compare extends Component {
                 activeMenu={this.props.state.activeMenuItem}
                 country={item.country}
                 data={item.data}
+                deleteItem={this.props.deleteCompareItems}
               />
             ))}
           </Fragment>
@@ -115,7 +121,7 @@ const mapStateToProps = state => {
   };
 };
 
-const actions = {};
+const actions = { deleteCompareItems };
 
 export default connect(
   mapStateToProps,

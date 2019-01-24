@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
 import HouseHold from "../sidebar/household/HouseHold";
-import Menu from "../sidebar//Menu";
 import CropsesData from "../sidebar/cropses/CropsesData";
 import Poverty from "../sidebar/poverty/Poverty";
 
@@ -75,12 +74,12 @@ export class CompareItemScreen extends Component {
       <SideBar>
         <ContentBox>
           <CountryTitle>{this.props.country}</CountryTitle>
-          <Button
+          {/* <Button
             onClick={this.removeCompareCountry(this.props.country)}
             label={this.props.country}
           >
             X
-          </Button>
+          </Button> */}
           {this.props.activeMenu === "income" && (
             <HouseHold data={this.props.data} />
           )}

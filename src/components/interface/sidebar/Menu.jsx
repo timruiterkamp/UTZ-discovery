@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
@@ -8,7 +8,7 @@ const MenuBar = styled.nav`
   display: flex;
   flex-direction: column;
   background-color: #f1f1f1;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   padding-top: 35px;
   position: relative;
