@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 const IntroContainer = styled.section`
   width: 50vw;
-  height: 50vh;
+  height: 60vh;
   position: absolute;
   top: 50%;
   left: 50%;

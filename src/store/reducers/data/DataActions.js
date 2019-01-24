@@ -68,6 +68,13 @@ function setCompareItem(value) {
   };
 }
 
+function deleteCompareItem(value) {
+  return {
+    type: "DELETE_COMPARE_ITEMS",
+    value
+  };
+}
+
 function setFilter(value) {
   return {
     type: "SET_FILTER",
@@ -109,6 +116,10 @@ export const setBaseSVG = data => dispatch => {
 
 export const setCompareItems = data => dispatch => {
   dispatch(setCompareItem(data));
+};
+
+export const deleteCompareItems = data => dispatch => {
+  dispatch(deleteCompareItem(data));
 };
 
 export const setGlobalFilters = data => dispatch => {

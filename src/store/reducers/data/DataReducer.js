@@ -34,6 +34,11 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         compareItems: [...state.compareItems, action.value]
       };
+    case "DELETE_COMPARE_ITEMS":
+      return {
+        ...state,
+        compareItems: state.compareItems.filter(obj => obj !== action.value)
+      };
     case "SET_FILTER":
       return {
         ...state,

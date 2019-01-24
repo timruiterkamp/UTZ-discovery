@@ -6,8 +6,12 @@ import HouseHold from "./household/HouseHold";
 import Menu from "./Menu";
 import CropsesData from "./cropses/CropsesData";
 import Poverty from "./poverty/Poverty";
+import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
-import { setCompareItems } from "../../../store/reducers/data/DataActions";
+import {
+  setCompareItems,
+  deleteCompareItems
+} from "../../../store/reducers/data/DataActions";
 
 const SideBar = styled.section`
   width: 35vw;
@@ -47,7 +51,6 @@ const ContentBox = styled.div`
 // `;
 
 const Button = styled.button`
-  width: 50%;
   margin: 0 auto;
   border: 1px solid ${props => props.color};
   padding: 0.5em 1em;
@@ -58,6 +61,13 @@ const Button = styled.button`
   cursor: pointer;
   outline: none;
   color: ${props => props.color};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5em;
+  }
 
   :hover {
     background-color: ${themeConfig.color.primary};
@@ -107,6 +117,8 @@ export class CountryInformation extends Component {
       )
     ) {
       console.log("bestaat al");
+      this.props.deleteCompareItems(this.props.state.activeCountry);
+
       this.setState({
         alreadyInComparison: [
           ...this.state.alreadyInComparison,
@@ -150,6 +162,15 @@ export class CountryInformation extends Component {
               {this.checkIfExists(
                 this.props.state.comparedItems,
                 this.props.state.activeCountry
+              ) ? (
+                <FiMinusCircle />
+              ) : (
+                <FiPlusCircle />
+              )}
+
+              {this.checkIfExists(
+                this.props.state.comparedItems,
+                this.props.state.activeCountry
               )
                 ? "Verwijderen uit vergelijking"
                 : "Toevoegen aan vergelijken"}
@@ -183,7 +204,7 @@ const mapStateToProps = state => {
   };
 };
 
-const actions = { setCompareItems };
+const actions = { setCompareItems, deleteCompareItems };
 
 export default connect(
   mapStateToProps,
