@@ -33,7 +33,7 @@ const RoundDisplay = styled.div`
 const TwoColumnGrid = styled.section`
   display: flex;
   flex-direction: row;
-  width: 40%;
+  width: 60%;
   justify-content: space-between;
   div {
     align-items: center;

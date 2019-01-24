@@ -17,6 +17,11 @@ const IntroContainer = styled.section`
   padding: 1.5em;
   display: ${props => props.display};
 
+  @media (max-width: 960px) {
+    width: 100vw;
+    height: 100vh;
+  }
+
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -43,11 +48,26 @@ const Text = styled.p`
   width: 50%;
   font-family: ${themeConfig.font.text};
   text-align: center;
+
+  @media (max-width: 960px) {
+    display: none;
+  }
 `;
 
+const MobileText = styled(Text)`
+  display: none;
+
+  @media (max-width: 960px) {
+    display: block;
+    font-size: 1.25em;
+  }
+`;
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
+  @media (max-width: 960px) {
+    display: none;
+  }
 `;
 const ContainerItem = styled.div`
   width: 33%;
@@ -71,6 +91,11 @@ const Button = styled.button`
   cursor: pointer;
   transition: 0.3s ease-in-out;
 
+  @media (max-width: 960px) {
+    position: fixed;
+    bottom: 2em;
+  }
+
   :hover {
     background-color: ${themeConfig.color.secondary};
     color: white;
@@ -90,6 +115,10 @@ const SubTitle = styled.p`
   width: 50%;
   font-family: ${themeConfig.font.text};
   text-align: center;
+
+  @media (max-width: 960px) {
+    display: none;
+  }
 `;
 class IntroScreen extends Component {
   state = {
@@ -105,6 +134,11 @@ class IntroScreen extends Component {
     return (
       <IntroContainer display={this.state.read ? "none" : "block"}>
         <Title>Hello, Welcome!</Title>
+        <MobileText>
+          This website is meant to be viewed on desktop. This website is not
+          responsive and the experience will not be the same. Please use this
+          website on desktop
+        </MobileText>
         <SubTitle>How does it work?</SubTitle>
         <ContentContainer>
           <ContainerItem>
