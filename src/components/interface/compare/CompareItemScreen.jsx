@@ -58,6 +58,14 @@ const CountryTitle = styled.h2`
   color: ${themeConfig.color.secondary};
 `;
 
+const Text = styled.h4`
+  font-size: 1.25em;
+  padding-top: 0;
+  font-weight: 700;
+  color: ${themeConfig.color.secondary};
+  font-family: ${themeConfig.font.title};
+`;
+
 export class CompareItemScreen extends Component {
   constructor(props) {
     super(props);
@@ -80,6 +88,7 @@ export class CompareItemScreen extends Component {
           >
             X
           </Button> */}
+          <Text>Total responses: {this.props.data.length}</Text>
           {this.props.activeMenu === "income" && (
             <HouseHold data={this.props.data} />
           )}
