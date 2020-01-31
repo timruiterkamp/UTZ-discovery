@@ -46,9 +46,13 @@ const MenuItem = styled.li`
       color: white;
     }
   }
-  :hover {
-    background-color: ${themeConfig.color.secondary};
+  &:hover {
+    background-color: #ffed97;
     color: white;
+
+    svg {
+      color: white;
+    }
   }
 `;
 
@@ -136,7 +140,4 @@ const actions = {
   setSidebarMenu
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Menu);
+export default connect(mapStateToProps, actions)(Menu);
