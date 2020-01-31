@@ -8,6 +8,7 @@ const IntroContainer = styled.section`
   width: 50vw;
   height: 60vh;
   max-width: 1000px;
+  max-height: 500px;
   position: absolute;
   top: 50%;
   left: 50%;
