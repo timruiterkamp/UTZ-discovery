@@ -8,8 +8,6 @@ const svg = d3
   .append("g");
 
 export function generateInformationTips(d, map) {
-  console.log(svg.selectAll("circle"));
-
   svg
     .selectAll("circle")
     .data(d)
@@ -42,7 +40,6 @@ export function generateInformationTips(d, map) {
     .on("zoom", () => update());
 }
 function project(coords, map) {
-  console.log(coords, map);
   return map.project(new MapboxGl.LngLat(+coords[0], +coords[1]));
 }
 

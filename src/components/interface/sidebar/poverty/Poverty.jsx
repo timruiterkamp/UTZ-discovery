@@ -39,8 +39,6 @@ export default function Poverty(props) {
     percentage: (d.values.length / props.data.length) * 100
   }));
 
-  console.log(HFIASamount, ScorePPIAmount);
-
   return (
     <Grid>
       <Text>HFIAS Status (percentage)</Text>

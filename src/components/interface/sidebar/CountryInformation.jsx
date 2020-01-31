@@ -116,7 +116,6 @@ export class CountryInformation extends Component {
         this.props.state.activeCountry
       )
     ) {
-      console.log("bestaat al");
       this.props.deleteCompareItems(this.props.state.activeCountry);
 
       this.setState({
@@ -206,7 +205,4 @@ const mapStateToProps = state => {
 
 const actions = { setCompareItems, deleteCompareItems };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(CountryInformation);
+export default connect(mapStateToProps, actions)(CountryInformation);

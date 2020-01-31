@@ -13,7 +13,7 @@ export default function CountryCropses(props) {
     .key(d => d.cropses_all)
     .entries(props.data);
 
-  const totalLand = console.log(totalCropses);
+  const totalLand = totalCropses;
 
   return <TotalLand>{totalLand}</TotalLand>;
 }

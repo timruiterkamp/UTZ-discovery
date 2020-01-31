@@ -10,6 +10,5 @@ const GridBlock = styled.div`
 `;
 
 export default function Grid(props) {
-  console.log(props);
   return <GridBlock>{props.children}</GridBlock>;
 }

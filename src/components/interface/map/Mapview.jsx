@@ -30,7 +30,7 @@ class Mapview extends Component {
   }
 
   generateInformationTips(d) {
-    if (this.svg) {
+    if (this.svg && d.length) {
       this.svg
         .selectAll("circle")
         .data(d)
@@ -160,7 +160,4 @@ const actions = {
   setBaseSVG
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Mapview);
+export default connect(mapStateToProps, actions)(Mapview);

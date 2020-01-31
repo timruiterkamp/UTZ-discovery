@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { setGlobalFilters } from "../../store/reducers/data/DataActions";
 import styled from "styled-components";
 import themeConfig from "../../theme/themeConfig";
-import * as d3 from "d3";
 import CheckBox from "./CheckBox";
 import SelectionBox from "./SelectionBox";
 import Radio from "./Radio";
@@ -364,7 +363,4 @@ const mapStateToProps = state => {
 };
 const actions = { setGlobalFilters };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(FilterSelection);
+export default connect(mapStateToProps, actions)(FilterSelection);

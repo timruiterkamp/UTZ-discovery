@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import themeConfig from "../../../theme/themeConfig";
-import NormalizeButton from "../button/NormalizeButton";
 import BackButton from "../button/BackButton";
 
 const Grid = styled.section`

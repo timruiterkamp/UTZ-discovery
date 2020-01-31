@@ -57,7 +57,6 @@ const Counter = styled.div`
 `;
 export class NavigationMenu extends Component {
   render() {
-    console.log(this.props.activeCompares);
     return (
       <MenuLayout>
         <MenuItem>

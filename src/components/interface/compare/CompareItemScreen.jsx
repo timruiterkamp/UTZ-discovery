@@ -28,29 +28,6 @@ const ContentBox = styled.div`
   position: relative;
 `;
 
-const Button = styled.button`
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  border-radius: 50%;
-  margin: 0 auto;
-  border: 1px solid #2d2d2d;
-  background: transparent;
-  font-size: 1em;
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-  font-family: Karla;
-  cursor: pointer;
-  position: absolute;
-  right: 2em;
-  top: 4.5em;
-
-  :hover {
-    background-color: ${themeConfig.color.primary};
-    border: 1px solid ${themeConfig.color.primary};
-  }
-`;
-
 const CountryTitle = styled.h2`
   font-size: 2em;
   font-size: 700;
@@ -67,15 +44,6 @@ const Text = styled.h4`
 `;
 
 export class CompareItemScreen extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props.state);
-  }
-
-  removeCompareCountry = country => {
-    console.log(country);
-  };
-
   render() {
     // const { activeMenuItem } = this.props.state;
     return (
@@ -119,7 +87,4 @@ const mapStateToProps = state => {
 
 const actions = { setCompareItems };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(CompareItemScreen);
+export default connect(mapStateToProps, actions)(CompareItemScreen);

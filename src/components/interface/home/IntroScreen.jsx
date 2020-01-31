@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 const IntroContainer = styled.section`
   width: 50vw;
   height: 60vh;
+  max-width: 1000px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -16,6 +17,7 @@ const IntroContainer = styled.section`
   background-color: white;
   padding: 1.5em;
   display: ${props => props.display};
+  flex-wrap: wrap;
 
   @media (max-width: 960px) {
     width: 100vw;
@@ -170,7 +172,4 @@ const actions = {
   setIntroMessageStatus
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(IntroScreen);
+export default connect(mapStateToProps, actions)(IntroScreen);

@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 export default class LineChart extends Component {
   constructor(props) {
     super(props);
-    console.log(props.data, props.number);
+
     this.state = {
       chartData: {
         labels: props.data.sort((a, b) => a.key - b.key).map(d => d.key),

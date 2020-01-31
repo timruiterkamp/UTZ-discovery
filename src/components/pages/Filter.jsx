@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Layout from "../layout/Layout";
 import BackButton from "../interface/button/BackButton";
 import styled from "styled-components";
 import themeConfig from "../../theme/themeConfig";
 import { FilterSelection } from "../filters/FilterSelection";
-import * as d3 from "d3";
 
 const Title = styled.h1`
   font-size: 2em;
@@ -34,9 +32,6 @@ const FilterContainer = styled.section`
   }
 `;
 class Filter extends Component {
-  componentDidMount = () => {
-    console.log(this.props.state);
-  };
   render() {
     return (
       <FilterContainer>
@@ -64,7 +59,4 @@ const mapStateToProps = state => ({
 
 const actions = {};
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Filter);
+export default connect(mapStateToProps, actions)(Filter);

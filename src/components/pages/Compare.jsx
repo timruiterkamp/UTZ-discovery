@@ -8,10 +8,7 @@ import BackButton from "../interface/button/BackButton";
 import themeConfig from "../../theme/themeConfig";
 import { FiMinimize2 } from "react-icons/fi";
 
-import {
-  setCompareItems,
-  deleteCompareItems
-} from "../../store/reducers/data/DataActions";
+import { deleteCompareItems } from "../../store/reducers/data/DataActions";
 
 const CompareContainer = styled.section`
   display: flex;
@@ -123,7 +120,4 @@ const mapStateToProps = state => {
 
 const actions = { deleteCompareItems };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Compare);
+export default connect(mapStateToProps, actions)(Compare);
