@@ -30,7 +30,7 @@ class Mapview extends Component {
   }
 
   generateInformationTips(d) {
-    if (this.svg && d.length) {
+    if (this.svg && d && d.length) {
       this.svg
         .selectAll("circle")
         .data(d)
